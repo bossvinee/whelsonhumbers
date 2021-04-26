@@ -45,7 +45,7 @@
                     <div class="col-sm-12">
                       <div class="card">
                         <div class="card-header" style="margin-bottom: 0;padding-bottom:0;">
-                            <h4 style="font-size:16px;margin-bottom:0;">Showing all allocations</h4>
+                            <h4 style="font-size:16px;margin-bottom:0;">Showing all allocations <span class="float-right"><a href="{{ url('/all-alloctions') }}" class="d-inline btn btn-sm btn-round btn-success">Allocate All Users</a></span> </h4>
                         </div>
                         <div class="card-block">
                           <div class="dt-responsive table-responsive">
@@ -57,6 +57,7 @@
                                 <tr>
                                   <th>Id</th>
                                   <th>Paynumber</th>
+                                  <th>Allocation</th>
                                   <th>Food</th>
                                   <th>Meet</th>
                                   <th>Meet A</th>
@@ -70,6 +71,7 @@
                                         <tr>
                                             <td>{{ $allocation->id }}</td>
                                             <td>{{ $allocation->paynumber }}</td>
+                                            <td>{{ $allocation->allocation }}</td>
                                             <td>{{ $allocation->food_allocation }}</td>
                                             <td>{{ $allocation->meet_allocation }}</td>
                                             <td>{{ $allocation->meet_a }}</td>

@@ -15,6 +15,7 @@ class Allocation extends Model
         'meet_allocation',
         'meet_a',
         'meet_b',
+        'allocation',
     ];
 
     protected $dates = [

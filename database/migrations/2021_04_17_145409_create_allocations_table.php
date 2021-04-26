@@ -15,6 +15,7 @@ class CreateAllocationsTable extends Migration
     {
         Schema::create('allocations', function (Blueprint $table) {
             $table->id();
+            $table->string('allocation');
             $table->string('paynumber');
             $table->integer('food_allocation');
             $table->integer('meet_allocation');

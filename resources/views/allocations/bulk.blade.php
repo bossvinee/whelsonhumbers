@@ -45,29 +45,30 @@
                       <div class="card">
                         <div class="card-header pb-0">
                             <h4 style="margin-bottom:0">Bulk Allocation</h4>
-                            <span>Ensure that you are sung the default naming convernsion on columns e.g Paynumber, Name, Month, Food, Meet, MeetA, MeetB</span>
+                            <span>Please select either Department or Employee type allocation</span>
                         </div>
                         <div class="card-block" style="padding-top: 7px;margin-top:0;">
                             <h4 class="sub-title"></h4>
                             <form method="POST" action="{{ url('/bulk-allocate-send') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
-                                    <label for="allocation" class="col-sm-2 col-form-label"
-                                        >Upload File : </label
-                                    >
-                                    <div class="col-sm-10">
-                                        <input type="file" class="form-control" id="allocation" name="allocation">
+                                    <div class="col-sm-5">
+                                        <select name="select_type" class="form-control" id="select_type" style="width: 100%;" required="" autofocus>
+                                            <option value="">Choose allocation type</option>
+                                            <option value="department">Department</option>
+                                            <option value="etype">Employee Type</option>
+                                        </select>
                                     </div>
-                                    @error('allocation')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong> {{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    <div class="col-sm-5">
+                                        <select name="result" class="form-control" id="result" style="width: 100%;" required="" autofocus>
+                                            <option value="">Please Select</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn waves-effect btn-round waves-light btn-block btn-sm btn-success">Search</button>
+                                    </div>
                                 </div>
 
-                                <div class="form-group row justify-content-end">
-                                    <button class="btn waves-effect btn-round waves-light btn-sm mr-4 btn-success">Create Allocation</button>
-                                </div>
                             </form>
                         </div>
                       </div>
@@ -82,23 +83,33 @@
 
 @section('footer_scripts')
 <script src="{{ asset('select2/js/select2.min.js') }}"></script>
-<script type="text/javascript">
-    $('#paynumber').select2({
-        placeholder:'Select user paynumber'
+<script>
+    $('#select_type').select2({
+        placeholder: 'Please select allocation type.',
+    }).change(function(){
+        var department = $(this).val();
+        var _token = $("input[name='_token']").val();
+        if(department){
+            $.ajax({
+                type:"get",
+                url:"{{url('/department-users')}}/"+department,
+                _token: _token ,
+                success:function(res) {
+                    if(res) {
+                        $("#result").empty();
+                        $.each(res,function(key, value){
+                            $("#result").append('<option value="'+value+'">'+value+'</option>');
+                        });
+                    }
+                }
+
+            });
+        }
     });
+
 </script>
 <script>
-    $(document).ready(function() {
-        $('#meet_a').select2({
-            placeholder:'Select meet type'
-        });
-    });
+    $('#result').select2();
 </script>
-<script>
-    $(document).ready(function() {
-        $('#meet_b').select2({
-            placeholder: 'Select meet type'
-        });
-    });
-</script>
+
 @endsection

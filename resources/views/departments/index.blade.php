@@ -6,47 +6,89 @@
 @endsection
 
 @section('content')
-<div class="row">
-    <div class="col-sm-12">
-      <div class="card">
-        <div class="card-block">
-          <div class="dt-responsive table-responsive">
-            <table
-              id="basic-btn"
-              class="table table-bordered nowrap"
-            >
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Department</th>
-                  <th>Manager</th>
-                  <th>Assistant</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                @if ($departments)
-                    @foreach ($departments as $department )
-                        <tr>
-                            <td>{{ $department->id }}</td>
-                            <td>{{ $department->department }}</td>
-                            <td>{{ App\Models\User::where('paynumber',$department->manager)->first()->first_name }} {{ App\Models\User::where('paynumber',$department->manager)->first()->last_name }}</td>
-                            <td>{{ $department->assistant }}</td>
-                            <td style="white-space: nowrap;width:20%;">
-                                <a href="{{ route('departments.edit',$department->id) }}" data-toggle="tooltip" title="Edit Department" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                <a href="{{ route('departments.show',$department->id) }}" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-                                <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
-              </tbody>
-            </table>
-          </div>
+
+<div class="page-header card">
+    <div class="row align-items-end">
+        @include('partials.form-status')
+        <div class="col-lg-8">
+            <div class="page-header-title">
+                <div class="d-inline">
+                    <h5>Departments</h5>
+                    <span class="pcoded-mtext">Department Users</span>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="col-lg-4">
+            <div class="page-header-breadcrumb">
+                <ul class="breadcrumb breadcrumb-title">
+                    <li class="breadcrumb-item">
+                        <a href="index.html"
+                        ><i class="feather icon-home"></i
+                        ></a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url('departments') }}">Departments</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{{ url('departments/create') }}">Add New</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="pcoded-inner-content">
+    <div class="main-body">
+        <div class="page-wrapper">
+            <div class="page-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                      <div class="card">
+                        <div class="card-block">
+                          <div class="dt-responsive table-responsive">
+                            <table
+                              id="basic-btn"
+                              class="table table-bordered nowrap"
+                            >
+                              <thead>
+                                <tr>
+                                  <th>Id</th>
+                                  <th>Department</th>
+                                  <th>Manager</th>
+                                  <th>Assistant</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                @if ($departments)
+                                    @foreach ($departments as $department )
+                                        <tr>
+                                            <td>{{ $department->id }}</td>
+                                            <td>{{ $department->department }}</td>
+                                            <td>{{ App\Models\User::where('paynumber',$department->manager)->first()->first_name }} {{ App\Models\User::where('paynumber',$department->manager)->first()->last_name }}</td>
+                                            <td>{{ $department->assistant }}</td>
+                                            <td style="white-space: nowrap;width:20%;">
+                                                <a href="{{ route('departments.edit',$department->id) }}" data-toggle="tooltip" title="Edit Department" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
+                                                <a href="{{ route('departments.show',$department->id) }}" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @endsection
 
 @section('footer_scripts')

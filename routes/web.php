@@ -41,6 +41,8 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::resource('allocations', 'App\Http\Controllers\AllocationsController');
     Route::get('bulk-allocation','App\Http\Controllers\AllocationsController@bulkAllocationForm');
     Route::post('bulk-allocate-send','App\Http\Controllers\AllocationsController@bulkAllocationInsert');
+    Route::get('all-alloctions','App\Http\Controllers\AllocationsController@allAllocations');
+    Route::get('/department-users/{department}','App\Http\Controllers\AllocationsController@getDepartmentalUsers');
 
     Route::resource('jobcards', 'App\Http\Controllers\JobcardsController');
 

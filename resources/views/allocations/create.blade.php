@@ -71,11 +71,24 @@
                                     @enderror
                                 </div>
                                 <div class="form-group row">
+                                    <label for="allocation" class="col-sm-2 col-form-label"
+                                        >Month : </label
+                                    >
+                                    <div class="col-sm-10">
+                                        <input type="text" id="allocation" class="form-control" name="allocation" placeholder="e.g 263Jan2021" required="" autofocus>
+                                    </div>
+                                    @error('allocation')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong> {{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group row">
                                     <label for="meet_a" class="col-sm-2 col-form-label"
                                         >Meet Type 1 : </label
                                     >
                                     <div class="col-sm-10">
-                                        <select name="meet_a" id="meet_a" class="form-control" style="width: 100%;">
+                                        <select name="meet_a" id="meet_a" class="form-control" style="width: 100%;" required="" autofocus>
                                             <option value="">Please select meet type</option>
                                             <option value="beef">Beef</option>
                                             <option value="chicken">Chicken</option>
