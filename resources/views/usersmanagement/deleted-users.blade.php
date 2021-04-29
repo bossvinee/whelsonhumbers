@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Showing all users
+    Showing all deleted users
 @endsection
 
 @section('template_linked_css')
@@ -18,7 +18,7 @@
             <div class="page-header-title">
                 <div class="d-inline">
                     <h5>Users</h5>
-                    <span class="pcoded-mtext"> Overview of system users</span>
+                    <span class="pcoded-mtext"> Overview of system deleted users</span>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
                         <a href="{{ url('users') }}">Users</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ url('users/create') }}">Add New</a>
+                        <a href="{{ url('deleted-users') }}">Deleted</a>
                     </li>
                 </ul>
             </div>
@@ -61,13 +61,13 @@
                               <thead>
                                 <tr>
                                   <th>Id</th>
-                                  <th>Name</th>
                                   <th>Pay Number</th>
                                   <th>Name</th>
                                   <th>Email</th>
                                   <th>Department</th>
                                   <th>User Type</th>
                                   <th>Role</th>
+                                  <th>Status</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -76,7 +76,6 @@
                                     @foreach ($users as $user )
                                         <tr>
                                             <td>{{ $user->id }}</td>
-                                            <td>{{ $user->name }}</td>
                                             <td>{{ $user->paynumber }}</td>
                                             <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                                             <td>{{ $user->email }}</td>
@@ -105,13 +104,28 @@
                                                     >
                                                 @endforeach
                                             </td>
+                                            <td>
+                                                @if ($user->activated == 1)
+                                                    <span class="badge badge-success">
+                                                    Activated
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-danger">
+                                                    Not-Activated
+                                                    </span>
+                                                @endif
+                                            </td>
                                             <td style="white-space: nowrap;">
-                                                <a href="{{ route('users.edit',$user->id) }}" data-toggle="tooltip" title="Edit User" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                                <a href="{{ route('users.show',$user->id) }}" data-toggle="tooltip" title="Show User" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-                                                <form method="POST" action="{{ route('users.destroy',$user->id) }}" class="d-inline">
+                                                <form method="POST" action="{{ route('deleted-users.update',$user->id) }}" role="form" class="d-inline">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button type="submit" data-toggle="tooltip" title="Restore User" class="btn btn-success btn-sm d-inline"><i class="fa fa-eye"></i></button>
+                                                </form>
+
+                                                <form method="POST" action="{{ route('deleted-users.destroy',$user->id) }}" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete User"><i class="fa fa-trash-o"></i></button>
+                                                    <button type="submit" class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Trash User"><i class="fa fa-trash-o"></i></button>
                                                 </form>
 
                                             </td>

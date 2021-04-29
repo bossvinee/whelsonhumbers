@@ -6,6 +6,7 @@ use App\Models\Department;
 use App\Models\User;
 use App\Models\Usertype;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use jeremykenedy\LaravelRoles\Models\Role;
@@ -123,7 +124,7 @@ class UsersManagementController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('usersmanagement.show',compact('user'));
     }
 
     /**
@@ -152,10 +153,11 @@ class UsersManagementController extends Controller
         $emailCheck = ($request->input('email') !== '') && ($request->input('email') !== $user->email);
 
         $validator = Validator::make($request->all(),[
-            'email' => 'required|unique:users|email',
-            'paynumber' => 'required|max:255|unique:users|alpha_dash',
+            'email' => 'required',
+            'paynumber' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
+            'mobile' => 'required',
             'department' => 'required',
             'usertype' => 'required',
             'role' => 'required',
@@ -168,12 +170,13 @@ class UsersManagementController extends Controller
         $first = substr($request->first_name,0,1);
         $username = Str::lower($first.$request->last_name);
 
-        $user->$username;
+        $user->name = $username;
         $user->paynumber = strip_tags($request->input('paynumber'));
         $user->first_name = strip_tags($request->input('first_name'));
         $user->last_name = strip_tags($request->input('last_name'));
         $user->department = $request->input('department');
         $user->usertype = $request->input('usertype');
+        $user->mobile = $request->input('mobile');
 
         if($emailCheck){
             $user->email = $request->input('email');
@@ -199,8 +202,18 @@ class UsersManagementController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        //
+        $currentUser = Auth::user();
+        $user = User::findOrFail($id);
+
+        if ($user->id != $currentUser->id) {
+            $user->activated = 0;
+            $user->save();
+            $user->delete();
+            return redirect('users')->with('success','User has been deleted successfully');
+        }
+
+        return back()->with('error','You cannot delete your own account.');
     }
 }

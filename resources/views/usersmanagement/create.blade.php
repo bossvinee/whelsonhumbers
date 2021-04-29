@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('template_title')
+    Create new user
+@endsection
+
 @section('template_linked_css')
     <link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
 @endsection

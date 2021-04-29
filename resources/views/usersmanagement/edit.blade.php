@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('template_title')
+    Edit {{ $user->name }}'s Account
+@endsection
+
 @section('template_linked_css')
     <link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
 @endsection
@@ -47,14 +51,15 @@
                         </div>
                         <div class="card-block">
                             <h4 class="sub-title"></h4>
-                            <form method="POST" action="{{ route('users.update',$user->id) }}">
+                            <form method="POST" action="{{ route('users.update',$user->id) }}" role="form" class="needs-validation">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-2 col-form-label"
                                         > Email: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="email" value="{{ $user->email }}" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="email" value="{{ $user->email }}" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="e.g vincentsimonmarufu@gmail.com" required="" autofocus/>
                                     </div>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -67,7 +72,7 @@
                                         > Pay number: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" value="{{ $user->paynumber }}" name="paynumber" id="paynumber" class="form-control @error('paynumber') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" value="{{ $user->paynumber }}" name="paynumber" id="paynumber" class="form-control @error('paynumber') is-invalid @enderror" placeholder="e.g 28A" required="" autofocus />
                                     </div>
                                     @error('paynumber')
                                         <span class="invalid-feedback" role="alert">
@@ -80,7 +85,7 @@
                                         > First Name: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" value="{{ $user->first_name }}" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" value="{{ $user->first_name }}" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" placeholder="e.g Vincent" required="" autofocus/>
                                     </div>
                                     @error('first_name')
                                         <span class="invalid-feedback" role="alert">
@@ -93,7 +98,7 @@
                                         > Last Name: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" value="{{ $user->last_name }}" name="last_name" id="last_name" class="form-control @error('last_name') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" value="{{ $user->last_name }}" name="last_name" id="last_name" class="form-control @error('last_name') is-invalid @enderror" placeholder="e.g Marufu" required="" autofocus/>
                                     </div>
                                     @error('last_name')
                                         <span class="invalid-feedback" role="alert">
@@ -106,7 +111,7 @@
                                         > Mobile: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" value="{{ $user->mobile }}" name="mobile" id="mobile" class="form-control @error('mobile') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" value="{{ $user->mobile }}" name="mobile" id="mobile" class="form-control @error('mobile') is-invalid @enderror" placeholder="e.g Accounts" required="" autofocus/>
                                     </div>
                                     @error('mobile')
                                         <span class="invalid-feedback" role="alert">
@@ -120,8 +125,8 @@
                                         >Department : </label
                                     >
                                     <div class="col-sm-10">
-                                        <select name="department" id="department" class="form-control">
-                                            <option value="">Please select department</option>
+                                        <select name="department" id="department" class="form-control @error('department') is-invalid @enderror " required="" autofocus >
+                                            <option value="{{ $user->department }}">{{ $user->department }}</option>
                                             @if ($departments)
                                                 @foreach ($departments as $department)
                                                     <option value="{{ $department->department }}">{{ $department->department }} </option>
@@ -140,8 +145,8 @@
                                         >Employee Type : </label
                                     >
                                     <div class="col-sm-10">
-                                        <select name="usertype" id="usertype" class="form-control">
-                                            <option value="">Please select employee type</option>
+                                        <select name="usertype" id="usertype" class="form-control @error('usertype') is-invalid @enderror" required="" autofocus>
+                                            <option value="{{ $user->usertype }}">{{ $user->usertype }}</option>
                                             @if ($usertypes)
                                                 @foreach ($usertypes as $usertype)
                                                     <option value="{{ $usertype->type }}">{{ $usertype->type }} </option>
@@ -160,7 +165,7 @@
                                         >Role : </label
                                     >
                                     <div class="col-sm-10">
-                                        <select name="role" id="role" class="form-control" required autofocus>
+                                        <select name="role" id="role" class="form-control @error('role') is-invalid @enderror" required autofocus>
                                             @if ($roles)
                                                 @foreach($roles as $role)
                                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -179,7 +184,7 @@
                                         > Password: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="password"  name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="password"  name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="e.g 12345678"  />
                                     </div>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -192,7 +197,7 @@
                                         >Confirm Password: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="password" name="confirm_password" id="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="password" name="confirm_password" id="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="e.g Accounts" />
                                     </div>
                                     @error('confirm_password')
                                         <span class="invalid-feedback" role="alert">
@@ -201,7 +206,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group row justify-content-end">
-                                    <button class="btn mr-3 waves-effect btn-round waves-light btn-sm btn-primary">Update User</button>
+                                    <button class="btn mr-3 waves-effect btn-round waves-light btn-sm btn-primary">Update User Account</button>
                                 </div>
                             </form>
                         </div>

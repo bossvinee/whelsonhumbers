@@ -41,6 +41,14 @@
                   <span class="pcoded-mtext">Manage Users</span>
                 </a>
               </li>
+              <li class="">
+                <a
+                  href="{{ url('deleted-users') }}"
+                  class="waves-effect waves-dark"
+                >
+                  <span class="pcoded-mtext">Deleted Users</span>
+                </a>
+              </li>
             </ul>
           </li>
           <li class="pcoded-hasmenu">

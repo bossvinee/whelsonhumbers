@@ -41,6 +41,7 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
 
     // users
     Route::resource('users', 'App\Http\Controllers\UsersManagementController');
+    Route::resource('deleted-users', 'App\Http\Controllers\SoftDeleteUsersController');
 
     // allocations
     Route::resource('allocations', 'App\Http\Controllers\AllocationsController');
