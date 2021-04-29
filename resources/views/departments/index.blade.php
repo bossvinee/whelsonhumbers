@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('template_title')
+    Showing all departments
+@endsection
+
 @section('template_linked_css')
 <link rel="stylesheet" type="text/css" href="{{ asset('dash_resource/css/datatables.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('dash_resource/css/buttons.datatables.min.css') }}">
@@ -66,12 +70,21 @@
                                         <tr>
                                             <td>{{ $department->id }}</td>
                                             <td>{{ $department->department }}</td>
-                                            <td>{{ App\Models\User::where('paynumber',$department->manager)->first()->first_name }} {{ App\Models\User::where('paynumber',$department->manager)->first()->last_name }}</td>
-                                            <td>{{ $department->assistant }}</td>
+                                            <td>{{ App\Models\User::where('paynumber',$department->manager)->first()->first_name }} {{ App\Models\User::where('paynumber',$department->manager)->first()->last_name }} - {{ $department->manager }}</td>
+                                            <td>
+                                                @if ($department->assistant)
+                                                    {{ App\Models\User::where('paynumber',$department->assistant)->first()->first_name }} {{ App\Models\User::where('paynumber',$department->assistant)->first()->last_name }} - {{ $department->assistant }}
+                                                @endif
+                                            </td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ route('departments.edit',$department->id) }}" data-toggle="tooltip" title="Edit Department" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                                                 <a href="{{ route('departments.show',$department->id) }}" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-                                                <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
+                                                <form method="POST" action="{{ route('departments.destroy',$department->id) }}" role="form" class="d-inline">
+                                                    @csrf
+                                                    @method("DELETE")
+                                                    <button type="submit" class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     @endforeach

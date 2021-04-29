@@ -70,6 +70,7 @@ class DepartmentsController extends Controller
                     'assistant' => '',
                 ]);
                 $department->save();
+                return redirect('departments')->with('success','New Department has been created successfully');
             }
             else
             {
@@ -79,14 +80,15 @@ class DepartmentsController extends Controller
                     'assistant' => $request->input('assistant'),
                 ]);
                 $department->save();
+                return redirect('departments')->with('success','New Department has been created successfully');
             }
         }
         else
         {
-            return back()->with('error','Department selected cannot be managed by the user');
+            return back()->with('error','User does not belong to the department.');
         }
 
-        return redirect('departments')->with('success','New Department has been created successfully');
+        return redirect('departments')->with('error','Something went wrong.');
     }
 
     /**
@@ -122,7 +124,55 @@ class DepartmentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'department' => 'required',
+            'manager' => 'required',
+            ]
+        );
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $department = Department::findOrFail($id);
+
+        if($request->manager === $request->assistant)
+        {
+            return back()->with('error','Please select different users for manager and assistant manager.');
+        }
+
+        $user_req = User::where('paynumber',$request->manager)->first();
+
+        if($user_req->department == $request->department)
+        {
+            if(empty($request->assistant) || $request->assistant =="")
+            {
+                $department->manager = $request->input('manager');
+                $department->department = $request->input('manager');
+                $department->save();
+                return redirect('departments')->with('success','Department has been updated successfully');
+            }
+            else
+            {
+                $assistant_manager = User::where('paynumber',$request->assistant)->first();
+
+                if ($assistant_manager->department == $request->department) {
+                    $department->manager = $request->input('manager');
+                    $department->department = $request->input('department');
+                    $department->assistant = $request->input('assistant');
+                    $department->save();
+
+                    return redirect('departments')->with('success','Department has been updated successfully');
+                }else {
+                    return back()->with('error','Assistant manager selected is does not belong to the department.');
+                }
+
+            }
+        }else {
+            return back()->with('error','User does not belong to the department');
+        }
+
+        return back()->with('error','There is something wronng with your input');
     }
 
     /**
@@ -133,6 +183,9 @@ class DepartmentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $department = Department::findOrFail($id);
+        $department->delete();
+
+        return redirect('departments')->with('success','Department has been deleted successfully.');
     }
 }
