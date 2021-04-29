@@ -73,7 +73,7 @@ class UsertypesController extends Controller
      */
     public function edit(Usertype $usertype)
     {
-        //
+        return view('usertypes.edit',compact('usertype'));
     }
 
     /**
@@ -85,7 +85,19 @@ class UsertypesController extends Controller
      */
     public function update(Request $request, Usertype $usertype)
     {
-        //
+        $validator = Validator::make($request->all(),[
+                'type' => 'required|unique:usertypes',
+            ],
+        );
+
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        $usertype->type = $request->input('type');
+        $usertype->save();
+
+        return redirect('usertypes')->with('success','Employee type has been updated successfully');
     }
 
     /**
@@ -94,8 +106,11 @@ class UsertypesController extends Controller
      * @param  \App\Models\Usertype  $usertype
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usertype $usertype)
+    public function destroy($id)
     {
-        //
+        $usertype = Usertype::findOrFail($id);
+        $usertype->delete();
+
+        return redirect('usertypes')->with('success','Employee type has been deleted successfully');
     }
 }

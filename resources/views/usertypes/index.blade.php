@@ -66,9 +66,14 @@
                                             <td>{{ $type->type }}</td>
                                             <td>{{ $type->created_at }}</td>
                                             <td style="white-space: nowrap;width:20%;">
-                                                <a href="" data-toggle="tooltip" title="Edit Department" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                                <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-                                                <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
+                                                <a href="{{ route('usertypes.edit',$type->id) }}" data-toggle="tooltip" title="Edit Usertype" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
+                                                <a href="" data-toggle="tooltip" title="Show Usertype" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                <form action="{{ route('usertypes.destroy',$type->id) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Usertype"><i class="fa fa-trash-o"></i></button>
+                                                </form>
+
                                             </td>
                                         </tr>
                                     @endforeach

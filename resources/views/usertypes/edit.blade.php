@@ -8,7 +8,7 @@
             <div class="page-header-title">
                 <div class="d-inline">
                     <h5>Employees</h5>
-                    <span class="pcoded-mtext">Add New</span>
+                    <span class="pcoded-mtext">Edit employee type</span>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     <div class="col-sm-12">
                       <div class="card">
                         <div class="card-header pb-0">
-                            <h4 style="font-size: 18px;">Create New Employee type</h4>
+                            <h4 style="font-size: 18px;">Edit </h4>
                         </div>
                         <div class="card-block mt-0 pt-0">
                             <h4 class="sub-title"></h4>
@@ -51,7 +51,7 @@
                                         >User type : </label
                                     >
                                     <div class="col-sm-8">
-                                        <input type="text" name="type" id="type" class="form-control @error('type') is-invalid @enderror" placeholder="e.g Salaried" required="" autofocus />
+                                        <input type="text" value="{{ $usertype->type }}" name="type" id="type" class="form-control @error('type') is-invalid @enderror" placeholder="e.g Salaried" required="" autofocus />
                                     </div>
                                     @error('type')
                                         <span class="invalid-feedback" role="alert">
@@ -60,7 +60,7 @@
                                     @enderror
 
                                     <div class="col-sm-2">
-                                        <button class="btn waves-effect waves-light btn-sm btn-primary">new user type</button>
+                                        <button class="btn waves-effect waves-light btn-sm btn-primary">Update type</button>
                                     </div>
                                 </div>
                             </form>
