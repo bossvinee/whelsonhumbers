@@ -293,7 +293,7 @@
                 <ul class="pcoded-submenu">
                   <li class="">
                     <a
-                      href="javascript:void(0)"
+                      href="{{ url('/fcollection/create') }}"
                       class="waves-effect waves-dark"
                     >
                       <span class="pcoded-mtext">Add Collection</span>
@@ -301,7 +301,7 @@
                   </li>
                   <li class="">
                     <a
-                      href="javascript:void(0)"
+                      href="{{ url('/fcollection') }}"
                       class="waves-effect waves-dark"
                     >
                       <span class="pcoded-mtext">Collections</span>

@@ -15,8 +15,6 @@ class FoodCollection extends Model
 
     protected $fillable = [
         'month',
-        'card_number',
-        'department',
         'paynumber',
         'collected_by',
         'id_number',
@@ -24,5 +22,9 @@ class FoodCollection extends Model
         'date_collected',
         'done_by',
     ];
-    
+
+    public function fdistribution() {
+        return $this->belongsTo(FoodDistribution::class,'paynumber','paynumber');
+    }
+
 }

@@ -16,13 +16,11 @@ class CreateFoodCollectionsTable extends Migration
         Schema::create('food_collections', function (Blueprint $table) {
             $table->id();
             $table->string('month');
-            $table->string('card_number');
-            $table->string('department');
             $table->string('paynumber');
             $table->string('collected_by')->default('self');
             $table->string('id_number')->nullable();
             $table->string('name');
-            $table->string('date_collected');
+            $table->date('date_collected');
             $table->string('done_by');
             $table->softDeletes();
             $table->timestamps();

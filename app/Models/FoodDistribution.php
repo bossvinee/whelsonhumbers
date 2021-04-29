@@ -22,5 +22,10 @@ class FoodDistribution extends Model
         'allocation',
         'done_by',
         'status',
+        'date_collected',
     ];
+
+    public function fcollection() {
+        return $this->hasOne(FoodCollection::class,'paynumber','paynumber');
+    }
 }

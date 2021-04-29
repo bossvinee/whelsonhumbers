@@ -30,14 +30,19 @@ Route::group(['middleware' => ['web','activity']], function () {
 // admin routes
 Route::group(['middleware' => ['web','activity','role:admin']], function () {
 
+    // departments
     Route::resource('departments', 'App\Http\Controllers\DepartmentsController');
 
+    // job titles
     Route::resource('jobtitles', 'App\Http\Controllers\JobtitlesController');
 
+    // usertypes
     Route::resource('usertypes', 'App\Http\Controllers\UsertypesController');
 
+    // users
     Route::resource('users', 'App\Http\Controllers\UsersManagementController');
 
+    // allocations
     Route::resource('allocations', 'App\Http\Controllers\AllocationsController');
     Route::get('bulk-allocation','App\Http\Controllers\AllocationsController@bulkAllocationForm');
     Route::post('bulk-allocate-send','App\Http\Controllers\AllocationsController@bulkAllocationInsert');
@@ -45,11 +50,17 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::get('/department-users/{department}','App\Http\Controllers\AllocationsController@getDepartmentalUsers');
     Route::get('/get-allocation/{paynumber}','App\Http\Controllers\FoodDistributionsController@getAllocation');
 
+    // jobcards
     Route::resource('jobcards', 'App\Http\Controllers\JobcardsController');
 
+    //distributions
     Route::resource('fdistributions', 'App\Http\Controllers\FoodDistributionsController');
 
     Route::resource('mdistributions', 'App\Http\Controllers\MeetDistributionsController');
+
+    // collections
+    Route::resource('fcollection', 'App\Http\Controllers\FoodCollectionController');
+    Route::get('get-fdistribution/{paynumber}','App\Http\Controllers\FoodCollectionController@getFdistribution');
 
     Route::get('/getname/{paynumber}','App\Http\Controllers\AllocationsController@getName');
     Route::get('/getTitles/{department}','App\Http\Controllers\JobtitlesController@getTitles');
