@@ -104,25 +104,6 @@
                                     @enderror
                                 </div>
                                 <div class="form-group row">
-                                    <label for="month" class="col-sm-2 col-form-label"
-                                        >Month : </label
-                                    >
-                                    <div class="col-sm-10">
-                                        <select name="month" id="month" class="form-control">
-                                            <option value="">Select month of issue</option>
-                                            <option value="Jan@php echo date('Y') @endphp">Jan@php echo date('Y') @endphp</option>
-                                            <option value="Feb@php echo date('Y') @endphp">Feb@php echo date('Y') @endphp</option>
-                                            <option value="Mar@php echo date('Y') @endphp">Mar@php echo date('Y') @endphp</option>
-                                            <option value="Apr@php echo date('Y') @endphp">Apr@php echo date('Y') @endphp</option>
-                                        </select>
-                                    </div>
-                                    @error('month')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong> {{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group row">
                                     <label for="name" class="col-sm-2 col-form-label"
                                         >Name : </label
                                     >
@@ -143,6 +124,21 @@
                                         <input type="date" name="issue_date" id="issue_date" class="form-control @error('issue_date') is-invalid @enderror" placeholder="e.g Accounts" required="" />
                                     </div>
                                     @error('issue_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong> {{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group row">
+                                    <label for="allocation" class="col-sm-2 col-form-label"
+                                        >Allocation : </label
+                                    >
+                                    <div class="col-sm-10">
+                                        <select name="allocation" id="allocation" class="form-control">
+                                            <option value="">Please select allocation</option>
+                                        </select>
+                                    </div>
+                                    @error('allocation')
                                         <span class="invalid-feedback" role="alert">
                                             <strong> {{ $message }}</strong>
                                         </span>
@@ -209,6 +205,21 @@
                 }
 
             });
+
+            $.ajax({
+                type:"get",
+                url:"/get-allocation/"+paynumber,
+                _token: _token ,
+                success:function(res) {
+                    if(res) {
+                        $("#allocation").empty();
+                        $.each(res,function(key, value){
+                            $("#allocation").append('<option value="'+value+'">'+value+'</option>');
+                        });
+                    }
+                }
+
+            });
         }
     });
 
@@ -222,8 +233,8 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('#month').select2({
-            placeholder:'select month'
+        $('#allocation').select2({
+            placeholder:'Please select allocation'
         });
     });
 </script>

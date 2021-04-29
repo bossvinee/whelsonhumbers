@@ -19,7 +19,8 @@ class FoodDistribution extends Model
         'name',
         'card_number',
         'issue_date',
-        'month',
-        'collected_by',
+        'allocation',
+        'done_by',
+        'status',
     ];
 }

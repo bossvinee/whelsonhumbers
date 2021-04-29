@@ -12,8 +12,8 @@
         <div class="col-lg-8">
             <div class="page-header-title">
                 <div class="d-inline">
-                    <h5>Allocations</h5>
-                    <span class="pcoded-mtext"> Users Allocations</span>
+                    <h5>Food Distribution</h5>
+                    <span class="pcoded-mtext"> Food humber distribution overview</span>
                 </div>
             </div>
         </div>
@@ -26,10 +26,10 @@
                         ></a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ url('allocations') }}">Allocations</a>
+                        <a href="{{ url('fdistributions') }}">Fdistribution</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ url('allocations/create') }}">Add New</a>
+                        <a href="{{ url('fdistributions/create') }}">Add New</a>
                     </li>
                 </ul>
             </div>
@@ -55,13 +55,15 @@
                             >
                               <thead>
                                 <tr>
-                                  <th>Id</th>
+                                  <th>Folio</th>
                                   <th>Deparment</th>
                                   <th>Number</th>
                                   <th>Name</th>
                                   <th>Job Card Number</th>
                                   <th>Issue Date</th>
                                   <th>Month</th>
+                                  <th>Status</th>
+                                  <th>Done By</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -75,7 +77,9 @@
                                             <td>{{ $distribution->name }}</td>
                                             <td>{{ $distribution->card_number }}</td>
                                             <td>{{ $distribution->issue_date }}</td>
-                                            <td>{{ $distribution->month }}</td>
+                                            <td>{{ $distribution->allocation }}</td>
+                                            <td>{{ $distribution->status }}</td>
+                                            <td>{{ $distribution->done_by }}</td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="" data-toggle="tooltip" title="Edit Department" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                                                 <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>

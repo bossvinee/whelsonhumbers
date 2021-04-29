@@ -272,6 +272,64 @@
               </li>
             </ul>
           </li>
+          <li class="pcoded-hasmenu">
+            <a
+              href="javascript:void(0)"
+              class="waves-effect waves-dark"
+            >
+              <span class="pcoded-micon">
+                <i class="feather icon-list"></i>
+              </span>
+              <span class="pcoded-mtext">Collection</span>
+            </a>
+            <ul class="pcoded-submenu">
+              <li class="pcoded-hasmenu">
+                <a
+                  href="javascript:void(0)"
+                  class="waves-effect waves-dark"
+                >
+                  <span class="pcoded-mtext">Food Collection</span>
+                </a>
+                <ul class="pcoded-submenu">
+                  <li class="">
+                    <a
+                      href="javascript:void(0)"
+                      class="waves-effect waves-dark"
+                    >
+                      <span class="pcoded-mtext">Add Collection</span>
+                    </a>
+                  </li>
+                  <li class="">
+                    <a
+                      href="javascript:void(0)"
+                      class="waves-effect waves-dark"
+                    >
+                      <span class="pcoded-mtext">Collections</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="pcoded-hasmenu">
+                <a
+                  href="javascript:void(0)"
+                  class="waves-effect waves-dark"
+                >
+                  <span class="pcoded-mtext">Meet Collection</span>
+                </a>
+                <ul class="pcoded-submenu">
+                  <li class="">
+                    <a
+                      href="javascript:void(0)"
+                      class="waves-effect waves-dark"
+                    >
+                      <span class="pcoded-mtext">Add Collection</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+            </ul>
+          </li>
           <li class="">
             <a
               href="navbar-light.html"

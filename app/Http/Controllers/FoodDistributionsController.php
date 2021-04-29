@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Allocation;
 use App\Models\FoodDistribution;
 use App\Models\Jobcard;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -43,6 +45,7 @@ class FoodDistributionsController extends Controller
      */
     public function store(Request $request)
     {
+
         $getcard = Jobcard::where('card_number',$request->card_number)->first();
         $user = User::where('paynumber',$request->paynumber)->first();
 
@@ -52,7 +55,7 @@ class FoodDistributionsController extends Controller
             'name' => 'required',
             'card_number' => 'required',
             'issue_date' => 'required',
-            'month' => 'required',
+            'allocation' => 'required',
         ]);
 
         if($validator->fails()){
@@ -66,11 +69,10 @@ class FoodDistributionsController extends Controller
             {
                 if ($user->allocation->food_allocation > 0)
                 {
-                    // check for the month
-                    $fdist = FoodDistribution::where('paynumber',$request->paynumber)
-                                            ->where('month',$request->month)
-                                            ->get();
-                    if($fdist->count() == 0)
+                    $allocation_month = Allocation::where('paynumber',$request->paynumber)
+                                        ->where('allocation',$request->allocation)
+                                        ->first();
+                    if( $allocation_month)
                     {
                         $food = FoodDistribution::create([
                             'department' => $request->input('department'),
@@ -78,24 +80,27 @@ class FoodDistributionsController extends Controller
                             'name' => $request->input('name'),
                             'card_number' => $request->input('card_number'),
                             'issue_date' => $request->input('issue_date'),
-                            'month' => $request->input('month'),
+                            'allocation' => $request->input('allocation'),
+                            'done_by' => Auth::user()->name,
                         ]);
                         $food->save();
 
                         if($food->save())
                         {
-                            if($getcard->card_month == $request->month)
+                            if($user->allocation->allocation == $getcard->card_month)
                             {
                                 $getcard->issued += 1;
                                 $getcard->remaining -= 1;
+
                             }else {
-                                $getcard->issued += 1;
                                 $getcard->remaining -= 1;
                                 $getcard->extras_previous += 1;
                             }
                             $getcard->save();
-                            $user->allocation->food_allocation -= 1;
-                            $user->allocation->save();
+
+                            $allocation_month->food_allocation -= 1;
+                            $allocation_month->status = "issued";
+                            $allocation_month->save();
 
                             return redirect('fdistributions')->with('success','Humber has been distributed successfully.');
                         }
@@ -169,11 +174,21 @@ class FoodDistributionsController extends Controller
         return response()->json($dpt);
     }
 
-    public function getUsername($paynumber){
+    public function getUsername($paynumber) {
         $name = DB::table("users")
           ->where("paynumber",$paynumber)
           ->pluck("name");
 
         return response()->json($name);
+    }
+
+    public function getAllocation($paynumber) {
+
+        $allocation = Allocation::where('paynumber',$paynumber)
+                    ->where('status','=',"not issued")
+                    ->pluck('allocation');
+        // dd($allocation);
+
+        return response()->json($allocation);
     }
 }

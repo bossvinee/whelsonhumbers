@@ -82,10 +82,10 @@
                                     <div class="col-sm-10">
                                         <select name="card_month" id="card_month" class="form-control" style="width: 100%;">
                                             <option value="">Select month of issue</option>
-                                            <option value="Jan@php echo date('Y') @endphp">Jan@php echo date('Y') @endphp</option>
-                                            <option value="Feb@php echo date('Y') @endphp">Feb@php echo date('Y') @endphp</option>
-                                            <option value="Mar@php echo date('Y') @endphp">Mar@php echo date('Y') @endphp</option>
-                                            <option value="Apr@php echo date('Y') @endphp">Apr@php echo date('Y') @endphp</option>
+                                            <option value="January@php echo date('Y') @endphp">January@php echo date('Y') @endphp</option>
+                                            <option value="February@php echo date('Y') @endphp">February@php echo date('Y') @endphp</option>
+                                            <option value="March@php echo date('Y') @endphp">March@php echo date('Y') @endphp</option>
+                                            <option value="April@php echo date('Y') @endphp">April@php echo date('Y') @endphp</option>
                                         </select>
                                     </div>
                                     @error('card_month')

@@ -20,8 +20,9 @@ class CreateFoodDistributionsTable extends Migration
             $table->string('name');
             $table->string('card_number');
             $table->date('issue_date');
-            $table->string('month');
-            $table->string('collected_by')->default('self');
+            $table->string('allocation');
+            $table->string('done_by');
+            $table->string('status')->default('not collected');
             $table->softDeletes();
             $table->timestamps();
         });

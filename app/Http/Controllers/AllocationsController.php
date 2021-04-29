@@ -63,15 +63,15 @@ class AllocationsController extends Controller
                             ->join('users','users.paynumber','=','allocations.paynumber')
                             ->select('users.name','allocations.*')
                             ->where('allocations.paynumber',$user->paynumber)
-                            ->first();
+                            ->get();
 
             $user_allocation = DB::table('allocations')
                             ->where('paynumber',$user->paynumber)
                             ->where('allocation',$request->allocation)
                             ->get();
 
+            if($user_alloc->count() > 0) {
 
-            if($user_alloc) {
                 if($user_allocation->count() == 0)
                 {
                     $allocation = Allocation::create([
@@ -81,6 +81,7 @@ class AllocationsController extends Controller
                         'meet_b' => $user_alloc->meet_b,
                         'meet_allocation' => 1,
                         'food_allocation' => 1,
+
                     ]);
                     $allocation->save();
 
@@ -165,19 +166,39 @@ class AllocationsController extends Controller
 
     public function bulkAllocationForm()
     {
-        $departments = Department::all();
 
         return view('allocations.bulk');
     }
 
     public function allAllocations()
     {
-        // $allocations = Allocation::all();
+        $users = User::all();
 
-        // foreach ($allocations as $allocation) {
-        //     $allocation->meet_allocation += 1;
-        //     $allocation->food_allocation += 1;
-        // }
+        foreach ($users as $user) {
+
+            $month_allocation = date('FY');
+
+            if($user->allocation) {
+                // check if user has been allocated for that month
+                $allocation_user = Allocation::where('allocation',$month_allocation)->first();
+                if (!$allocation_user )
+                {
+                    $allocation = Allocation::create([
+                        'allocation' => $month_allocation,
+                        'paynumber' => $user->paynumber,
+                        'food_allocation' => 1,
+                        'meet_allocation' => 1,
+                        'meet_a' => $user->allocation->meet_a,
+                        'meet_b' => $user->allocation->meet_b,
+                    ]);
+                    $allocation->save();
+                } else {
+                    continue;
+                }
+            }
+        }
+
+        return redirect('allocations')->with('success','Users has been allocated Successfully');
     }
 
     public function getDepartmentalUsers($department)
@@ -217,39 +238,66 @@ class AllocationsController extends Controller
             foreach ($users as $user) {
 
                 $month_allocation = $user->paynumber.date('FY');
-                $user_allo = Allocation::where('paynumber',$user->paynumber)
-                                        ->where('allocation',$month_allocation)
-                                        ->first();
-                // check if user has been allocated
-                if($user_allo) {
 
-                    continue;
-
+                if($user->allocation) {
+                    // check if user has been allocated for that month
+                    $allocation_user = Allocation::where('allocation',$month_allocation)->first();
+                    if (!$allocation_user )
+                    {
+                        $allocation = Allocation::create([
+                            'allocation' => $month_allocation,
+                            'paynumber' => $user->paynumber,
+                            'food_allocation' => 1,
+                            'meet_allocation' => 1,
+                            'meet_a' => $user->allocation->meet_a,
+                            'meet_b' => $user->allocation->meet_b,
+                        ]);
+                        $allocation->save();
+                    } else {
+                        continue;
+                    }
                 }
-                    $user->allocation->food_allocation += 1;
-                    $user->allocation->meet_allocation += 1;
-                    $user->allocation->allocation = $month_allocation;
-                    $user->allocation->save();
 
             }
 
-            return redirect('allocations')->with('success',"$request->result has been allocated successfully");
+            return redirect('allocations')->with('success',"$request->result department has been allocated successfully");
 
-        }elseif ($request->select_type == "etype")
+        }
+
+        if ($request->select_type == "etype")
         {
-            $usertypes = User::where('usertype',$request->result);
+            $usertypes = User::where('usertype',$request->result)->get();
+
             foreach ($usertypes as $user) {
 
                 $month_allocation = $user->paynumber.date('FY');
-                $user->allocation->food_allocation += 1;
-                $user->allocation->meet_allocation += 1;
-                $user->allocation->allocation = $month_allocation;
-                $user->allocation->save();
-                return redirect('allocations')->with('success',"$request->result has been allocated successfully");
+
+                if($user->allocation) {
+                    // check if user has been allocated for that month
+                    $allocation_user = Allocation::where('allocation',$month_allocation)->first();
+                    if (!$allocation_user )
+                    {
+                        $allocation = Allocation::create([
+                            'allocation' => $month_allocation,
+                            'paynumber' => $user->paynumber,
+                            'food_allocation' => 1,
+                            'meet_allocation' => 1,
+                            'meet_a' => $user->allocation->meet_a,
+                            'meet_b' => $user->allocation->meet_b,
+                        ]);
+                        $allocation->save();
+                    } else {
+                        continue;
+                    }
+                }
+
             }
+
+            return redirect('allocations')->with('success',"$request->result type has been allocated successfully");
+
         }
 
-        return redirect('bulk-allocation')->with('error','System was unable to allocate department');
+        return redirect('bulk-allocation')->with('error','System was unable to allocate users');
     }
 
 }

@@ -43,6 +43,7 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::post('bulk-allocate-send','App\Http\Controllers\AllocationsController@bulkAllocationInsert');
     Route::get('all-alloctions','App\Http\Controllers\AllocationsController@allAllocations');
     Route::get('/department-users/{department}','App\Http\Controllers\AllocationsController@getDepartmentalUsers');
+    Route::get('/get-allocation/{paynumber}','App\Http\Controllers\FoodDistributionsController@getAllocation');
 
     Route::resource('jobcards', 'App\Http\Controllers\JobcardsController');
 

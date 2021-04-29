@@ -75,7 +75,7 @@
                                         >Month : </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" id="allocation" class="form-control" name="allocation" placeholder="e.g 263Jan2021" required="" autofocus>
+                                        <input type="text" id="allocation" class="form-control" name="allocation" placeholder="e.g January2021" required="" autofocus>
                                     </div>
                                     @error('allocation')
                                         <span class="invalid-feedback" role="alert">

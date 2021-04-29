@@ -21,6 +21,7 @@ class CreateAllocationsTable extends Migration
             $table->integer('meet_allocation');
             $table->string('meet_a');
             $table->string('meet_b');
+            $table->string('status')->default("not issued");
             $table->softDeletes();
             $table->timestamps();
         });

@@ -62,6 +62,7 @@
                                   <th>Meet</th>
                                   <th>Meet A</th>
                                   <th>Meet B</th>
+                                  <th>Status</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -76,6 +77,7 @@
                                             <td>{{ $allocation->meet_allocation }}</td>
                                             <td>{{ $allocation->meet_a }}</td>
                                             <td>{{ $allocation->meet_b }}</td>
+                                            <td>{{ $allocation->status }}</td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ route('allocations.edit',$allocation->id) }}" data-toggle="tooltip" title="Edit Department" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                                                 <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
