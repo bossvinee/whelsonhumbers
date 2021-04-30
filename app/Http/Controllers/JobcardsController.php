@@ -155,7 +155,7 @@ class JobcardsController extends Controller
      */
     public function edit(Jobcard $jobcard)
     {
-        //
+        return view('jobcards.edit',compact('jobcard'));
     }
 
     /**

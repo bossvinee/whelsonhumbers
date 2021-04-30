@@ -47,6 +47,7 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::resource('allocations', 'App\Http\Controllers\AllocationsController');
     Route::get('bulk-allocation','App\Http\Controllers\AllocationsController@bulkAllocationForm');
     Route::post('bulk-allocate-send','App\Http\Controllers\AllocationsController@bulkAllocationInsert');
+    Route::post('bulk-allocation-post','App\Http\Controllers\AllocationsController@bulkAllocationPost');
     Route::get('all-alloctions','App\Http\Controllers\AllocationsController@allAllocations');
     Route::get('/department-users/{department}','App\Http\Controllers\AllocationsController@getDepartmentalUsers');
     Route::get('/get-allocation/{paynumber}','App\Http\Controllers\FoodDistributionsController@getAllocation');
@@ -56,6 +57,8 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
 
     //distributions
     Route::resource('fdistributions', 'App\Http\Controllers\FoodDistributionsController');
+    Route::get('bulk-food-form','App\Http\Controllers\FoodDistributionsController@bulkFoodDistribution');
+    Route::post('bulk-food-upload','App\Http\Controllers\FoodDistributionsController@bulkFoodUpload');
 
     Route::resource('mdistributions', 'App\Http\Controllers\MeetDistributionsController');
 

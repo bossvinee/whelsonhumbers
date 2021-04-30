@@ -235,6 +235,14 @@
               </li>
               <li class="">
                 <a
+                  href="{{ url('bulk-food-form') }}"
+                  class="waves-effect waves-dark"
+                >
+                  <span class="pcoded-mtext">Bulk Distribution</span>
+                </a>
+              </li>
+              <li class="">
+                <a
                   href="{{ url('fdistributions') }}"
                   class="waves-effect waves-dark"
                 >

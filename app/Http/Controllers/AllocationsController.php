@@ -32,7 +32,7 @@ class AllocationsController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+        $users = User::where('activated',1)->get();
         return view('allocations.create',compact('users'));
     }
 
@@ -44,6 +44,7 @@ class AllocationsController extends Controller
      */
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'paynumber' => 'required',
             'meet_a' => 'required',
@@ -141,7 +142,20 @@ class AllocationsController extends Controller
      */
     public function update(Request $request, Allocation $allocation)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'meet_a' => 'required',
+            'meet_b' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $allocation->meet_a = $request->input('meet_a');
+        $allocation->meet_b = $request->input('meet_b');
+        $allocation->save();
+
+        return redirect('allocations')->with('success','Allocation has been updated successfully');
     }
 
     /**
@@ -150,9 +164,12 @@ class AllocationsController extends Controller
      * @param  \App\Models\Allocation  $allocation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Allocation $allocation)
+    public function destroy($id)
     {
-        //
+        $allocation = Allocation::findOrFail($id);
+        $allocation->delete();
+
+        return redirect('allocations')->with('success','Allocation has been deleted Successfully');
     }
 
     public function getName($paynumber)
@@ -219,6 +236,7 @@ class AllocationsController extends Controller
         }
 
     }
+
 
     public function bulkAllocationInsert(Request $request) {
 

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('template_title')
+    Showing all jobcards
+@endsection
+
 @section('template_linked_css')
 <link rel="stylesheet" type="text/css" href="{{ asset('dash_resource/css/datatables.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('dash_resource/css/buttons.datatables.min.css') }}">
@@ -81,7 +85,7 @@
                                             <td>{{ $jobcard->remaining }}</td>
                                             <td>{{ $jobcard->extras_previous }}</td>
                                             <td style="white-space: nowrap;width:20%;">
-                                                <a href="" data-toggle="tooltip" title="Edit Department" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
+                                                <a href="{{ route('jobcards.edit',$jobcard->id) }}" data-toggle="tooltip" title="Edit Jobcard" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                                                 <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
                                                 <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
                                             </td>

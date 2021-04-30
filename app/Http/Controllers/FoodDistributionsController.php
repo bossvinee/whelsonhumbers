@@ -191,4 +191,22 @@ class FoodDistributionsController extends Controller
 
         return response()->json($allocation);
     }
+
+    public function bulkFoodDistribution() {
+        $jobcards = Jobcard::latest()->get();
+        return view('fooddistribution.bulk',compact('jobcards'));
+    }
+
+    public function bulkFoodUpload(Request $request) {
+        $validator = Validator::make($request->all(),[
+            'select_type' => 'required',
+            'result' => 'required',
+            'month' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withError($validator)->withInput();
+        }
+
+    }
 }

@@ -48,14 +48,15 @@
                         </div>
                         <div class="card-block" style="padding-top: 7px;margin-top:0;">
                             <h4 class="sub-title"></h4>
-                            <form method="POST" action="{{ route('allocations.store') }}">
+                            <form method="POST" action="{{ route('allocations.update',$allocation->id) }}">
                                 @csrf
+                                @method('PUT')
                                 <div class="form-group row">
                                     <label for="paynumber" class="col-sm-2 col-form-label"
                                         >Paynumber : </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" disabled name="paynumber" class="form-control" value="{{ $allocation->paynumber }}">
+                                        <input type="text" disabled="" name="paynumber" class="form-control" value="{{ $allocation->paynumber }}">
                                     </div>
                                     @error('paynumber')
                                         <span class="invalid-feedback" role="alert">
@@ -68,7 +69,7 @@
                                         >Meet Type 1 : </label
                                     >
                                     <div class="col-sm-10">
-                                        <select name="meet_a" id="meet_a" class="form-control" style="width: 100%;">
+                                        <select name="meet_a" id="meet_a" class="form-control @error('meet_a') is-invalid @enderror" required="" style="width: 100%;">
                                             <option value="{{ $allocation->meet_a }}">{{ $allocation->meet_a }}</option>
                                             <option value="beef">Beef</option>
                                             <option value="chicken">Chicken</option>
@@ -86,7 +87,7 @@
                                         >Meet Type 2 : </label
                                     >
                                     <div class="col-sm-10">
-                                        <select name="meet_b" id="meet_b" class="form-control" style="width: 100%;">
+                                        <select name="meet_b" id="meet_b" class="form-control @error('meet_b') is-invalid @enderror" required="" style="width: 100%;">
                                             <option value="{{ $allocation->meet_b }}">{{ $allocation->meet_b }}</option>
                                             <option value="beef">Beef</option>
                                             <option value="chicken">Chicken</option>

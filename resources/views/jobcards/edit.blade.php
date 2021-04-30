@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Create new jobcard
+    Edit Jobcard
 @endsection
 
 @section('template_linked_css')
@@ -58,7 +58,7 @@
                                         >Card Number : </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" name="card_number" id="card_number" class="form-control @error('card_number') is-invalid @enderror" placeholder="e.g 121211121" required="" />
+                                        <input type="text" value="{{ $jobcard->card_number }}" name="card_number" id="card_number" class="form-control @error('card_number') is-invalid @enderror" placeholder="e.g 121211121" required="" />
                                     </div>
                                     @error('card_number')
                                         <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                                         >Date Opened : </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="date" name="date_opened" id="date_opened" class="form-control @error('date_opened') is-invalid @enderror" required="" />
+                                        <input type="date" value="{{ $jobcard->date_opened }}" name="date_opened" id="date_opened" class="form-control @error('date_opened') is-invalid @enderror" required="" />
                                     </div>
                                     @error('date_opened')
                                         <span class="invalid-feedback" role="alert">
@@ -85,7 +85,7 @@
                                     >
                                     <div class="col-sm-10">
                                         <select name="card_month" id="card_month" class="form-control" style="width: 100%;">
-                                            <option value="">Select month of issue</option>
+                                            <option value="{{ $jobcard->card_month }}">{{ $jobcard->card_month }}</option>
                                             <option value="January@php echo date('Y') @endphp">January@php echo date('Y') @endphp</option>
                                             <option value="February@php echo date('Y') @endphp">February@php echo date('Y') @endphp</option>
                                             <option value="March@php echo date('Y') @endphp">March@php echo date('Y') @endphp</option>
@@ -104,7 +104,7 @@
                                     >
                                     <div class="col-sm-10">
                                         <select name="card_type" id="card_type" class="form-control" style="width: 100%;">
-                                            <option value="">Please select jobcard type</option>
+                                            <option value="{{ $jobcard->card_type }}">{{ $jobcard->card_type }}</option>
                                             <option value="meet">Meet</option>
                                             <option value="food">Food</option>
                                         </select>
@@ -120,7 +120,7 @@
                                         >Quantity : </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="number" name="quantity" id="quantity" class="form-control @error('quantity') is-invalid @enderror" required="" />
+                                        <input type="number" value="{{ $jobcard->quantity }}" name="quantity" id="quantity" class="form-control @error('quantity') is-invalid @enderror" required="" />
                                     </div>
                                     @error('quantity')
                                         <span class="invalid-feedback" role="alert">
@@ -129,7 +129,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group row justify-content-end">
-                                    <button class="btn waves-effect btn-round waves-light btn-sm btn-success mr-3">Add Job Card</button>
+                                    <button class="btn waves-effect btn-round waves-light btn-sm btn-success mr-3">Update Job Card</button>
                                 </div>
                             </form>
                         </div>
