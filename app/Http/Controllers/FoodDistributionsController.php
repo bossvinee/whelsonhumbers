@@ -198,15 +198,78 @@ class FoodDistributionsController extends Controller
     }
 
     public function bulkFoodUpload(Request $request) {
+
         $validator = Validator::make($request->all(),[
             'select_type' => 'required',
             'result' => 'required',
             'month' => 'required',
+            'issue_date' => 'required',
+            'card_number' => 'required',
         ]);
 
         if ($validator->fails()) {
             return back()->withError($validator)->withInput();
         }
 
+        if ($request->select_type == "department") {
+
+            $users = User::where('department',$request->result)->get();
+
+            foreach ($users as $user) {
+
+                if ($user->allocation) {
+
+                    $user_allocation = Allocation::where('allocation',$request->month)->where('paynumber',$user->paynumber)->first();
+
+                    if ($user_allocation )
+                    {
+                        $distributor = FoodDistribution::create([
+                            'department' => $user->department,
+                            'paynumber' => $user->paynumber,
+                            'name' => $user->name,
+                            'card_number' => $request->input('card_number'),
+                            'issue_date' => $request->input('issue_date'),
+                            'allocation' => $request->input('month'),
+                            'done_by' => Auth::user()->name,
+                        ]);
+                        $distributor->save();
+                    }
+                }
+            }
+            return redirect('fdistributions')->with('success','Humber has been distributed successfully.');
+
+        }
+
+        if ($request->select_type == "etype") {
+
+            $users = User::where('usertype',$request->result)->get();
+
+            foreach ($users as $user) {
+
+                if ($user->allocation) {
+
+                    $user_allocation = Allocation::where('allocation',$request->month)->where('paynumber',$user->paynumber)->first();
+
+                    if ($user_allocation )
+                    {
+                        $distributor = FoodDistribution::create([
+                            'department' => $user->department,
+                            'paynumber' => $user->paynumber,
+                            'name' => $user->name,
+                            'card_number' => $request->input('card_number'),
+                            'issue_date' => $request->input('issue_date'),
+                            'allocation' => $request->input('month'),
+                            'done_by' => Auth::user()->name,
+                        ]);
+                        $distributor->save();
+                    } else {
+                        continue;
+                    }
+                }
+            }
+            return redirect('fdistributions')->with('success','Humber has been distributed successfully.');
+        }
+
+        return back()->with('error','Something wrong with your input');
     }
 }

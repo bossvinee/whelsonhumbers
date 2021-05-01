@@ -137,7 +137,7 @@
               </li>
               <li class="">
                 <a
-                  href="{{ url('allocations') }}"
+                  href="{{ url('import-allocation') }}"
                   class="waves-effect waves-dark"
                 >
                   <span class="pcoded-mtext">Import Allocation</span>

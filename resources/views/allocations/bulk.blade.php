@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
+@section('template_title')
+    Bulk Allocation
+@endsection
+
 @section('template_linked_css')
-<link rel="stylesheet" type="text/css" href="{{ asset('dash_resource/css/datatables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
 @endsection
 @section('content')
 
@@ -53,19 +56,29 @@
                             <form method="POST" action="{{ url('/bulk-allocate-send') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
-                                    <div class="col-sm-5">
+                                    <label for="select_type" class="col-sm-4 col-form-label"
+                                        >Department or Usertype : </label
+                                    >
+                                    <div class="col-sm-8">
                                         <select name="select_type" class="form-control" id="select_type" style="width: 100%;" required="" autofocus>
                                             <option value="">Choose allocation type</option>
                                             <option value="department">Department</option>
                                             <option value="etype">Employee Type</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-5">
+                                </div>
+                                <div class="form-group row">
+                                    <label for="result" class="col-sm-4 col-form-label"
+                                    >Result : </label
+                                >
+                                    <div class="col-sm-8">
                                         <select name="result" class="form-control" id="result" style="width: 100%;" required="" autofocus>
                                             <option value="">Please Select</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-2">
+                                </div>
+                                <div class="form-group row justify-content-end mb-4">
+                                    <div class="col-sm-3 mt-2">
                                         <button class="btn waves-effect btn-round waves-light btn-block btn-sm btn-success">Allocate</button>
                                     </div>
                                 </div>
@@ -83,11 +96,6 @@
 @endsection
 
 @section('footer_scripts')
-<script src="{{ asset('dash_resource/js/jquery.datatables.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('dash_resource/js/datatables.bootstrap4.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('dash_resource/js/datatables.responsive.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('dash_resource/js/extension-btns-custom.js') }}" type="text/javascript"></script>
-
 <script src="{{ asset('select2/js/select2.min.js') }}"></script>
 <script>
     $('#select_type').select2({

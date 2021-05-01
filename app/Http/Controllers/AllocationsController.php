@@ -187,33 +187,56 @@ class AllocationsController extends Controller
         return view('allocations.bulk');
     }
 
+    public function allocationImportForm() {
+
+        return view('allocations.import');
+    }
+
+    public function allocationImportSend(Request $request) {
+
+        $validator = Validator::make($request->all(),[
+            'allocation' => 'required',
+
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        Excel::import(new AllocationsImport,request()->file('allocation'));
+
+        return redirect('allocations')->with('Data has been imported successfully');
+    }
+
     public function allAllocations()
     {
         $users = User::all();
 
-        // foreach ($users as $user) {
+        foreach ($users as $user) {
 
-        //     $month_allocation = date('FY');
+            $month_allocation = date('FY');
 
-        //     if($user->allocation) {
-        //         // check if user has been allocated for that month
-        //         $allocation_user = Allocation::where('allocation',$month_allocation)->first();
-        //         if (!$allocation_user )
-        //         {
-        //             $allocation = Allocation::create([
-        //                 'allocation' => $month_allocation,
-        //                 'paynumber' => $user->paynumber,
-        //                 'food_allocation' => 1,
-        //                 'meet_allocation' => 1,
-        //                 'meet_a' => $user->allocation->meet_a,
-        //                 'meet_b' => $user->allocation->meet_b,
-        //             ]);
-        //             $allocation->save();
-        //         } else {
-        //             continue;
-        //         }
-        //     }
-        // }
+            if($user->allocation) {
+                // check if user has been allocated for that month
+                $allocation_user = Allocation::where('allocation',$month_allocation)
+                                            ->where('paynumber',$user->paynumber)
+                                            ->first();
+                if (!$allocation_user )
+                {
+                    $allocation = Allocation::create([
+                        'allocation' => $month_allocation,
+                        'paynumber' => $user->paynumber,
+                        'food_allocation' => 1,
+                        'meet_allocation' => 1,
+                        'meet_a' => $user->allocation->meet_a,
+                        'meet_b' => $user->allocation->meet_b,
+                    ]);
+                    $allocation->save();
+                } else {
+                    continue;
+                }
+            }
+        }
 
         return redirect('allocations')->with('success','Users has been allocated Successfully');
     }

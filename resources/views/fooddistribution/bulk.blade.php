@@ -92,7 +92,7 @@
 
                                 <div class="form-group row">
                                     <label for="month" class="col-sm-3 col-form-label"
-                                        >Card Month : </label
+                                        >Month : </label
                                     >
                                     <div class="col-sm-9">
                                         <select name="month" id="month" class="form-control" style="width: 100%;">
