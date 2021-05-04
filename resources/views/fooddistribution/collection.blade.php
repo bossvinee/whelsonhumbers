@@ -10,8 +10,8 @@
         <div class="col-lg-8">
             <div class="page-header-title">
                 <div class="d-inline">
-                    <h5>Food Distribution</h5>
-                    <span class="pcoded-mtext"> Add New</span>
+                    <h5>Food Collection</h5>
+                    <span class="pcoded-mtext"> Add New Collection</span>
                 </div>
             </div>
         </div>
@@ -24,10 +24,10 @@
                         ></a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ url('fdistributions') }}">Food Distribution</a>
+                        <a href="{{ url('fdistributions') }}">Food Collection</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ url('fdistributions/create') }}">Add New</a>
+                        <a href="{{ url('fdistributions/create') }}">Add New Collection</a>
                     </li>
                 </ul>
             </div>
@@ -43,11 +43,12 @@
                     <div class="col-sm-12">
                       <div class="card">
                         <div class="card-header pb-0">
-                            <h4 style="font-size:18px;">New food distribution <span class="float-right"><a href="{{ url('fdistributions') }}" class="btn d-inline btn-sm btn-light btn-light waves-light btn-round">Back to Fdistributions</a></span></h4>
+                            <h4 style="font-size:18px;">New food collection <span class="float-right"><a href="{{ url('fdistributions') }}" class="btn d-inline btn-sm btn-light btn-light waves-light btn-round">Back to Fdistributions</a></span></h4>
+                            <p><b>NB: </b> If the humber was collected by another person fill in collected by and ID number else leave blank. </p>
                         </div>
                         <div class="card-block" style="padding-top: 0;margin-top:0;">
                             <h4 class="sub-title"></h4>
-                            <form method="POST" action="{{ route('fdistributions.store') }}">
+                            <form method="POST" action="{{ route('fcollection.store') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <label for="paynumber" class="col-sm-2 col-form-label"
@@ -58,46 +59,12 @@
                                             <option value="">Select pay number</option>
                                             @if ($users)
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->paynumber }}"> {{ $user->paynumber }} - {{ $user->first_name }} {{ $user->last_name }}</option>
+                                                    <option value="{{ $user->paynumber }}">( {{ $user->paynumber }} ) {{ $user->first_name }} {{ $user->last_name }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
                                     </div>
                                     @error('paynumber')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong> {{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group row">
-                                    <label for="department" class="col-sm-2 col-form-label"
-                                        >Department : </label
-                                    >
-                                    <div class="col-sm-10">
-                                        <input type="text" name="department" id="department" class="form-control @error('department') is-invalid @enderror" placeholder="e.g Accounts" required="" />
-                                    </div>
-                                    @error('department')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong> {{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="card_number" class="col-sm-2 col-form-label"
-                                        >Job card number : </label
-                                    >
-                                    <div class="col-sm-10">
-                                        <select name="card_number" id="card_number" class="form-control">
-                                            <option value="">Please select card number</option>
-                                            @if ($jobcards)
-                                                @foreach ($jobcards as $jobcard)
-                                                    <option value="{{ $jobcard->card_number }}"> {{ $jobcard->card_number }}</option>
-                                                @endforeach
-                                            @endif
-                                        </select>
-                                    </div>
-                                    @error('card_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong> {{ $message }}</strong>
                                         </span>
@@ -117,35 +84,62 @@
                                     @enderror
                                 </div>
                                 <div class="form-group row">
-                                    <label for="issue_date" class="col-sm-2 col-form-label"
-                                        >Issue Date : </label
+                                    <label for="distribution" class="col-sm-2 col-form-label"
+                                        >Month Distribution : </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="date" name="issue_date" id="issue_date" class="form-control @error('issue_date') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <select name="distribution" id="distribution" class="form-control">
+                                            <option value="">Please Select Distribution</option>
+                                        </select>
                                     </div>
-                                    @error('issue_date')
+                                    @error('distribution')
                                         <span class="invalid-feedback" role="alert">
                                             <strong> {{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
                                 <div class="form-group row">
-                                    <label for="allocation" class="col-sm-2 col-form-label"
-                                        >Allocation : </label
+                                    <label for="date_collected" class="col-sm-2 col-form-label"
+                                        >Date Collected : </label
                                     >
                                     <div class="col-sm-10">
-                                        <select name="allocation" id="allocation" class="form-control">
-                                            <option value="">Please select allocation</option>
-                                        </select>
+                                        <input type="date" name="date_collected" id="date_collected" class="form-control @error('date_collected') is-invalid @enderror" placeholder="e.g Accounts" required="" />
                                     </div>
-                                    @error('allocation')
+                                    @error('date_collected')
                                         <span class="invalid-feedback" role="alert">
                                             <strong> {{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
+                                <div class="form-group row">
+                                    <label for="collected_by" class="col-sm-2 col-form-label"
+                                        >Collected By: </label
+                                    >
+                                    <div class="col-sm-10">
+                                        <input type="text" name="collected_by" id="collected_by" class="form-control @error('collected_by') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                    </div>
+                                    @error('collected_by')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong> {{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group row">
+                                    <label for="id_number" class="col-sm-2 col-form-label"
+                                        >ID Number : </label
+                                    >
+                                    <div class="col-sm-10">
+                                        <input type="text" name="id_number" id="id_number" class="form-control @error('id_number') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                    </div>
+                                    @error('id_number')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong> {{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                                 <div class="form-group row justify-content-end">
-                                    <button class="btn waves-effect btn-round waves-light btn-sm mr-4 btn-primary">create issue</button>
+                                    <button class="btn waves-effect btn-round waves-light btn-sm mr-4 btn-primary">Create Distribution</button>
                                 </div>
                             </form>
                         </div>
@@ -208,13 +202,13 @@
 
             $.ajax({
                 type:"get",
-                url:"/get-allocation/"+paynumber,
+                url:"/get-fdistribution/"+paynumber,
                 _token: _token ,
                 success:function(res) {
                     if(res) {
-                        $("#allocation").empty();
+                        $("#distribution").empty();
                         $.each(res,function(key, value){
-                            $("#allocation").append('<option value="'+value+'">'+value+'</option>');
+                            $("#distribution").append('<option value="'+value+'">'+value+'</option>');
                         });
                     }
                 }
@@ -226,15 +220,8 @@
 </script>
 <script>
     $(document).ready(function() {
-        $('#card_number').select2({
-            placeholder:'select card number'
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#allocation').select2({
-            placeholder:'Please select allocation'
+        $('#distribution').select2({
+            placeholder:'Please select distribution'
         });
     });
 </script>

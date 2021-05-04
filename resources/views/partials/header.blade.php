@@ -2,7 +2,7 @@
     <div class="navbar-wrapper">
       <div class="navbar-logo">
         <a href="index.html">
-          <img class="img-fluid" src="png/logo.png" alt="{{ config('app.name', 'Laravel') }}" />
+          <img class="img-fluid" src="{{ asset('dash_resource\png\top_logo_small.png') }}" alt="{{ config('app.name', 'Laravel') }}" />
         </a>
         <a class="mobile-menu" id="mobile-collapse" href="#!">
           <i class="feather icon-menu icon-toggle-right"></i>

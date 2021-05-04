@@ -21,7 +21,7 @@ class AllocationsController extends Controller
      */
     public function index()
     {
-        $allocations = Allocation::all();
+        $allocations = Allocation::orderBy('created_at', 'desc')->get();
         return view('allocations.index',compact('allocations'));
     }
 

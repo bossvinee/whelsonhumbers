@@ -45,6 +45,8 @@
                       <div class="card">
                         <div class="card-header pb-0">
                             <h4 style="margin-bottom:0">Update {{ $allocation->paynumber }} Allocation</h4>
+                            <p class="pt-3">Please be advised that you should only update the last allocation of the user e.g <strong style="font-weight: bold;"> @php echo date('FY'); @endphp </strong></p>
+                            <p><b style="font-weight: bold;">NB : </b> System automatically increments allocations based on the latest allocation.</p>
                         </div>
                         <div class="card-block" style="padding-top: 7px;margin-top:0;">
                             <h4 class="sub-title"></h4>
@@ -63,6 +65,14 @@
                                             <strong> {{ $message }}</strong>
                                         </span>
                                     @enderror
+                                </div>
+                                <div class="form-group row">
+                                    <label for="allocation" class="col-sm-2 col-form-label"
+                                        >Allocation : </label
+                                    >
+                                    <div class="col-sm-10">
+                                        <input type="text" disabled="" class="form-control" value="{{ $allocation->allocation }}">
+                                    </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="meet_a" class="col-sm-2 col-form-label"

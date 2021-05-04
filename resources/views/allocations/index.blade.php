@@ -80,11 +80,11 @@
                                             <td>{{ $allocation->status }}</td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ route('allocations.edit',$allocation->id) }}" data-toggle="tooltip" title="Edit Allocation" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                                <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                <a href="" data-toggle="tooltip" title="Show Allocation" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
                                                 <form method="POST" role="form" class="d-inline" action="{{ route('allocations.destroy',$allocation->id) }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
+                                                    <button type="submit" class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Allocation"><i class="fa fa-trash-o"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -117,4 +117,5 @@
 <script src="{{ asset('dash_resource/js/datatables.bootstrap4.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/datatables.responsive.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/extension-btns-custom.js') }}" type="text/javascript"></script>
+
 @endsection

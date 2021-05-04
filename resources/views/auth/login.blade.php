@@ -33,8 +33,8 @@
 						<form action="{{ route('login') }}" method="POST" class="login-form">
                             @csrf
 							<div class="form-group">
-								<input id="email" type="email" class="form-control rounded-left @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="{{ __('E-Mail Address') }}" required autocomplete="email">
-                                @error('email')
+								<input id="paynumber" type="text" class="form-control rounded-left @error('paynumber') is-invalid @enderror" name="login" value="{{ old('paynumber') }}" placeholder="{{ __('Pay Number') }}" required autocomplete="paynumber">
+                                @error('paynumber')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

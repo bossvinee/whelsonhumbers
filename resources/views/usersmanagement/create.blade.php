@@ -58,7 +58,7 @@
                                         > Email: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="e.g vmarufu@whelson.co.zw"  />
                                     </div>
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -71,7 +71,7 @@
                                         > Pay number: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" name="paynumber" id="paynumber" class="form-control @error('paynumber') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" name="paynumber" id="paynumber" class="form-control @error('paynumber') is-invalid @enderror" placeholder="e.g APPS244" required="" />
                                     </div>
                                     @error('paynumber')
                                         <span class="invalid-feedback" role="alert">
@@ -84,7 +84,7 @@
                                         > First Name: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" placeholder="e.g Vincent" required="" />
                                     </div>
                                     @error('first_name')
                                         <span class="invalid-feedback" role="alert">
@@ -97,7 +97,7 @@
                                         > Last Name: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" name="last_name" id="last_name" class="form-control @error('last_name') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" name="last_name" id="last_name" class="form-control @error('last_name') is-invalid @enderror" placeholder="e.g Marufu" required="" />
                                     </div>
                                     @error('last_name')
                                         <span class="invalid-feedback" role="alert">
@@ -110,7 +110,7 @@
                                         > Mobile: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" name="mobile" id="mobile" class="form-control @error('mobile') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" name="mobile" id="mobile" class="form-control @error('mobile') is-invalid @enderror" placeholder="e.g 0772876456" required="" />
                                     </div>
                                     @error('mobile')
                                         <span class="invalid-feedback" role="alert">
@@ -183,7 +183,7 @@
                                         > Password: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" placeholder="e.g 123456789" required="" />
                                     </div>
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -196,7 +196,7 @@
                                         >Confirm Password: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="password" name="confirm_password" id="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="password" name="confirm_password" id="confirm_password" class="form-control @error('confirm_password') is-invalid @enderror" placeholder="e.g 123456789" required="" />
                                     </div>
                                     @error('confirm_password')
                                         <span class="invalid-feedback" role="alert">

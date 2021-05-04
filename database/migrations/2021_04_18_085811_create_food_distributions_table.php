@@ -22,8 +22,10 @@ class CreateFoodDistributionsTable extends Migration
             $table->date('issue_date');
             $table->string('allocation');
             $table->string('done_by');
-            $table->string('status')->default('not collected');
+            $table->string('status')->default('Not Collected');
             $table->date('date_collected')->nullable();
+            $table->string('collected_by')->default('SELF');
+            $table->string('id_number')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

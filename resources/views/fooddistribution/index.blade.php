@@ -45,7 +45,7 @@
                     <div class="col-sm-12">
                       <div class="card">
                         <div class="card-header" style="margin-bottom: 0;padding-bottom:0;">
-                            <h4 style="font-size:16px;margin-bottom:0;">Showing all allocations</h4>
+                            <h4 style="font-size:16px;margin-bottom:0;">Showing all humbers distributed</h4>
                         </div>
                         <div class="card-block">
                           <div class="dt-responsive table-responsive">
@@ -59,10 +59,12 @@
                                   <th>Deparment</th>
                                   <th>Number</th>
                                   <th>Name</th>
-                                  <th>Job Card Number</th>
+                                  <th>Jobcard No:</th>
                                   <th>Issue Date</th>
                                   <th>Month</th>
                                   <th>Status</th>
+                                  <th>Collected By</th>
+                                  <th>ID Number</th>
                                   <th>Done By</th>
                                   <th>Action</th>
                                 </tr>
@@ -78,10 +80,24 @@
                                             <td>{{ $distribution->card_number }}</td>
                                             <td>{{ $distribution->issue_date }}</td>
                                             <td>{{ $distribution->allocation }}</td>
-                                            <td>{{ $distribution->status }}</td>
+                                            <td>
+                                                @if ($distribution->status == 'Not Collected')
+                                                    @php
+                                                        $badgeClass = 'warning'
+                                                    @endphp
+                                                @else
+                                                    @php $badgeClass = 'success' @endphp
+                                                @endif
+                                                <span
+                                                    class="badge badge-{{$badgeClass}}"
+                                                    >{{ $distribution->status }}</span
+                                                >
+                                            </td>
+                                            <td>{{ $distribution->collected_by }}</td>
+                                            <td>{{ $distribution->id_number }}</td>
                                             <td>{{ $distribution->done_by }}</td>
                                             <td style="white-space: nowrap;width:20%;">
-                                                <a href="" data-toggle="tooltip" title="Edit Department" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
+                                                <a href="{{ url('add-collection/'.$distribution->id) }}" data-toggle="tooltip" title="Add to collection" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                                                 <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
                                                 <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
                                             </td>
@@ -115,4 +131,5 @@
 <script src="{{ asset('dash_resource/js/datatables.bootstrap4.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/datatables.responsive.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/extension-btns-custom.js') }}" type="text/javascript"></script>
+
 @endsection

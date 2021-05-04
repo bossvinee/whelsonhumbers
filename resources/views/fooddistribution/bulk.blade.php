@@ -101,6 +101,8 @@
                                             <option value="February@php echo date('Y') @endphp">February@php echo date('Y') @endphp</option>
                                             <option value="March@php echo date('Y') @endphp">March@php echo date('Y') @endphp</option>
                                             <option value="April@php echo date('Y') @endphp">April@php echo date('Y') @endphp</option>
+                                            <option value="May@php echo date('Y') @endphp">May@php echo date('Y') @endphp</option>
+                                            <option value="June@php echo date('Y') @endphp">June@php echo date('Y') @endphp</option>
                                         </select>
                                     </div>
                                     @error('card_month')

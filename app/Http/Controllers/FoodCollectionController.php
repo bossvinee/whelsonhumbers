@@ -18,8 +18,8 @@ class FoodCollectionController extends Controller
      */
     public function index()
     {
-        $collections = FoodCollection::all();
-        return view('collection.foodCollection.index',compact('collections'));
+        $fdists = FoodDistribution::where('status','=','Collected')->latest()->get();
+        return view('fooddistribution.all-collection',compact('fdists'));
     }
 
     /**
@@ -30,7 +30,7 @@ class FoodCollectionController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('collection.foodCollection.create',compact('users'));
+        return view('fooddistribution.collection',compact('users'));
     }
 
     /**
@@ -41,6 +41,10 @@ class FoodCollectionController extends Controller
      */
     public function store(Request $request)
     {
+        $distribution = FoodDistribution::where('paynumber',$request->paynumber)
+                                        ->where('allocation',$request->distribution)
+                                        ->first();
+
         $validator = Validator::make($request->all(),[
             'paynumber' => 'required',
             'name' => 'required',
@@ -54,35 +58,38 @@ class FoodCollectionController extends Controller
 
         // check if collected by is supplied by
         if (!empty($request->collected_by) || $request->collected_by !== null) {
+
             if(empty($request->id_number) || $request->id_number == null) {
-                return back()->with('error','Collector id number is missing. ');
+                return back()->with('error','Collector ID number is missing. ');
+            } else {
+
+                if ($distribution) {
+
+                    $distribution->status = "Collected";
+                    $distribution->collected_by = $request->collected_by;
+                    $distribution->id_number = $request->id_number;
+                    $distribution->save();
+
+                    return redirect('fcollection')->with('success','Record has been updated successfully.');
+
+                } else {
+
+                    return back()->with('error','Distribution does not exist.');
+                }
+
             }
         }
 
-        $distribution = FoodDistribution::where('paynumber',$request->paynumber)
-                                        ->where('allocation',$request->distribution)
-                                        ->first();
         if ($distribution) {
-            $collection = FoodCollection::create([
-                'paynumber' => $request->input('paynumber'),
-                'name' => $request->input('name'),
-                'month' => $request->input('distribution'),
-                'date_collected' => $request->input('date_collected'),
-                'collected_by' => strip_tags($request->input('collected_by')),
-                'id_number' => strip_tags($request->input('id_number')),
-                'done_by' => Auth::user()->name,
-            ]);
-            $collection->save();
 
-            if ($collection->save()) {
+            $distribution->status = "Collected";
+            $distribution->save();
 
-                $collection->fdistribution->status = "collected";
-                $collection->fdistribution->date_collected = $request->date_collected;
-                $collection->fdistribution->save();
+            return redirect('fcollection')->with('success','Record has been updated successfully.');
 
-                return redirect('fcollection')->with('success','Collection has been recorded successfully.');
-            }
+        } else {
 
+            return back()->with('error','Distribution does not exist.');
         }
     }
 

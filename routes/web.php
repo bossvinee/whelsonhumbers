@@ -52,8 +52,7 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::post('allocation-import-send','App\Http\Controllers\AllocationsController@allocationImportSend');
     Route::get('all-alloctions','App\Http\Controllers\AllocationsController@allAllocations');
     Route::get('/department-users/{department}','App\Http\Controllers\AllocationsController@getDepartmentalUsers');
-    Route::get('/get-allocation/{paynumber}','App\Http\Controllers\FoodDistributionsController@getAllocation');
-
+    Route::resource('deleted-allocations', 'App\Http\Controllers\SoftDeleteAllocations');
 
     // jobcards
     Route::resource('jobcards', 'App\Http\Controllers\JobcardsController');
@@ -62,6 +61,12 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::resource('fdistributions', 'App\Http\Controllers\FoodDistributionsController');
     Route::get('bulk-food-form','App\Http\Controllers\FoodDistributionsController@bulkFoodDistribution');
     Route::post('bulk-food-upload','App\Http\Controllers\FoodDistributionsController@bulkFoodUpload');
+    Route::get('food-import','App\Http\Controllers\FoodDistributionsController@getDisttibutionImport');
+    Route::post('food-import-send','App\Http\Controllers\FoodDistributionsController@fdistributionImportSend');
+    Route::get('/get-allocation/{paynumber}','App\Http\Controllers\FoodDistributionsController@getAllocation');
+    Route::get('add-collection/{id}','App\Http\Controllers\FoodDistributionsController@addCollection')->name('add-collection');
+    Route::get('multi-insert','App\Http\Controllers\FoodDistributionsController@multiInsert');
+    Route::post('multi-insert-post','App\Http\Controllers\FoodDistributionsController@multiInsertPost');
 
     Route::resource('mdistributions', 'App\Http\Controllers\MeetDistributionsController');
 
@@ -73,6 +78,12 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::get('/getTitles/{department}','App\Http\Controllers\JobtitlesController@getTitles');
     Route::get('/getdepartment/{paynumber}','App\Http\Controllers\FoodDistributionsController@getDepartment');
     Route::get('/getusername/{paynumber}','App\Http\Controllers\FoodDistributionsController@getUsername');
+
+    // Reports
+    Route::get('jobcard-report','App\Http\Controllers\ReportsController@jobcardReport');
+    Route::post('jobcard-report-post','App\Http\Controllers\ReportsController@jobcardReportPost');
+    Route::get('month-report','App\Http\Controllers\ReportsController@getMonthlyReport');
+    Route::post('month-report-post','App\Http\Controllers\ReportsController@getMonthlyReportPost');
 });
 
 Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger\App\Http\Controllers', 'middleware' => ['web', 'auth', 'activity','role:admin']], function () {

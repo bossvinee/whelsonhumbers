@@ -86,7 +86,7 @@
               class="waves-effect waves-dark"
             >
               <span class="pcoded-micon"
-                ><i class="feather icon-sidebar"></i
+                ><i class="fa fa-user"></i
               ></span>
               <span class="pcoded-mtext">Employee Types</span>
             </a>
@@ -167,8 +167,7 @@
               class="waves-effect waves-dark"
             >
               <span class="pcoded-micon"
-                ><i class="feather icon-sidebar"></i
-              ></span>
+                ><i class="fa fa-file-text"></i></span>
               <span class="pcoded-mtext">Jobcards</span>
             </a>
             <ul class="pcoded-submenu">
@@ -212,7 +211,7 @@
               class="waves-effect waves-dark"
             >
               <span class="pcoded-micon"
-                ><i class="feather icon-sidebar"></i
+                ><i class="fa fa-shopping-basket"></i
               ></span>
               <span class="pcoded-mtext">Food Distribution</span>
             </a>
@@ -222,15 +221,15 @@
                   href="{{ url('fdistributions/create') }}"
                   class="waves-effect waves-dark"
                 >
-                  <span class="pcoded-mtext">Add New</span>
+                  <span class="pcoded-mtext">Add New Distribution</span>
                 </a>
               </li>
               <li class="">
                 <a
-                  href="{{ url('fdistributions') }}"
+                  href="{{ url('multi-insert') }}"
                   class="waves-effect waves-dark"
                 >
-                  <span class="pcoded-mtext">Distribution</span>
+                  <span class="pcoded-mtext">Multiple Distribution</span>
                 </a>
               </li>
               <li class="">
@@ -243,7 +242,7 @@
               </li>
               <li class="">
                 <a
-                  href="{{ url('fdistributions') }}"
+                  href="{{ url('food-import') }}"
                   class="waves-effect waves-dark"
                 >
                   <span class="pcoded-mtext">Import Distribution</span>
@@ -256,6 +255,40 @@
                 >
                   <span class="pcoded-mtext">Deleted Distribution</span>
                 </a>
+              </li>
+              <li class="">
+                <a
+                  href="{{ url('fdistributions') }}"
+                  class="waves-effect waves-dark"
+                >
+                  <span class="pcoded-mtext">Distribution</span>
+                </a>
+              </li>
+              <li class="pcoded-hasmenu">
+                <a
+                  href="javascript:void(0)"
+                  class="waves-effect waves-dark"
+                >
+                  <span class="pcoded-mtext">Collection</span>
+                </a>
+                <ul class="pcoded-submenu">
+                  <li class="">
+                    <a
+                      href="{{ url('fcollection/create') }}"
+                      class="waves-effect waves-dark"
+                    >
+                      <span class="pcoded-mtext">Add Collection</span>
+                    </a>
+                  </li>
+                  <li class="">
+                    <a
+                      href="{{ url('fcollection') }}"
+                      class="waves-effect waves-dark"
+                    >
+                      <span class="pcoded-mtext">Collections</span>
+                    </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </li>
@@ -288,64 +321,37 @@
               </li>
             </ul>
           </li>
+
           <li class="pcoded-hasmenu">
             <a
               href="javascript:void(0)"
               class="waves-effect waves-dark"
             >
-              <span class="pcoded-micon">
-                <i class="feather icon-list"></i>
-              </span>
-              <span class="pcoded-mtext">Collection</span>
+              <span class="pcoded-micon"
+                ><i class="fa fa-info"></i
+              ></span>
+              <span class="pcoded-mtext">Reports</span>
             </a>
             <ul class="pcoded-submenu">
-              <li class="pcoded-hasmenu">
+              <li class="">
                 <a
-                  href="javascript:void(0)"
+                  href="{{ url('month-report') }}"
                   class="waves-effect waves-dark"
                 >
-                  <span class="pcoded-mtext">Food Collection</span>
+                  <span class="pcoded-mtext">Monthly Report</span>
                 </a>
-                <ul class="pcoded-submenu">
-                  <li class="">
-                    <a
-                      href="{{ url('/fcollection/create') }}"
-                      class="waves-effect waves-dark"
-                    >
-                      <span class="pcoded-mtext">Add Collection</span>
-                    </a>
-                  </li>
-                  <li class="">
-                    <a
-                      href="{{ url('/fcollection') }}"
-                      class="waves-effect waves-dark"
-                    >
-                      <span class="pcoded-mtext">Collections</span>
-                    </a>
-                  </li>
-                </ul>
               </li>
-              <li class="pcoded-hasmenu">
+              <li class="">
                 <a
-                  href="javascript:void(0)"
+                  href="{{ url('jobcard-report') }}"
                   class="waves-effect waves-dark"
                 >
-                  <span class="pcoded-mtext">Meet Collection</span>
+                  <span class="pcoded-mtext">Job cards</span>
                 </a>
-                <ul class="pcoded-submenu">
-                  <li class="">
-                    <a
-                      href="javascript:void(0)"
-                      class="waves-effect waves-dark"
-                    >
-                      <span class="pcoded-mtext">Add Collection</span>
-                    </a>
-                  </li>
-                </ul>
               </li>
-
             </ul>
           </li>
+
           <li class="">
             <a
               href="navbar-light.html"

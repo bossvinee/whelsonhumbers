@@ -49,7 +49,6 @@ class UsersManagementController extends Controller
 
         $validator = Validator::make($request->all(),
         [
-            'email' => 'required|unique:users|email',
             'paynumber' => 'required|max:255|unique:users|alpha_dash',
             'first_name' => 'required',
             'last_name' => 'required',
