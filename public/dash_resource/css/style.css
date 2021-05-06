@@ -801,9 +801,9 @@ a.bg-danger:hover {
 .table-border-style .table {
     margin-bottom: 0;
 }
-.table > thead > tr > th {
-    border-bottom-color: #ccc;
-}
+/*.table > thead > tr > th {*/
+/*    border-bottom-color: #ccc;*/
+/*}*/
 .table-borderless tbody tr td,
 .table-borderless tbody tr th {
     border: 0;

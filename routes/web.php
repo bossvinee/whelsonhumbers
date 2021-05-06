@@ -67,6 +67,7 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::get('add-collection/{id}','App\Http\Controllers\FoodDistributionsController@addCollection')->name('add-collection');
     Route::get('multi-insert','App\Http\Controllers\FoodDistributionsController@multiInsert');
     Route::post('multi-insert-post','App\Http\Controllers\FoodDistributionsController@multiInsertPost');
+    Route::get('searchallocation', 'App\Http\Controllers\FoodDistributionsController@searchResponse');
 
     Route::resource('mdistributions', 'App\Http\Controllers\MeetDistributionsController');
 

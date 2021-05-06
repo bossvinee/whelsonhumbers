@@ -358,8 +358,82 @@ class FoodDistributionsController extends Controller
         return view('fooddistribution.multi',compact('users','jobcards'));
     }
 
-    public function multiInsertPost() {
+    public function multiInsertPost(Request $request) {
 
+        $validator = Validator::make($request->all(),[
+            'paynumber' => 'required',
+            'card_number' => 'required',
+            'name' => 'required',
+            'department' => 'required',
+            'allocation' => 'required',
+            'issue_date' => 'required',
+        ]);
 
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $count = 0;
+        for ($count; $count < count($request->paynumber); $count++) {
+
+            $jobcard = Jobcard::where('card_number',$request->card_number[$count])->first();
+
+            if ($jobcard->remaining > 0) {
+
+                $distribution = FoodDistribution::create([
+                    'department' => $request->department[$count],
+                    'paynumber' => $request->paynumber[$count],
+                    'name' => $request->name[$count],
+                    'card_number' => $request->card_number[$count],
+                    'issue_date' => $request->issue_date[$count],
+                    'allocation' => $request->allocation[$count],
+                    'done_by' => Auth::user()->name,
+
+                ]);
+                $distribution->save();
+
+            } else {
+                return redirect('jobcards')->with('error','System was unable to complete the distribution. Please open a new jobcard');
+            }
+//            $data = array(
+//                    'department' => $request->department[$count],
+//                    'paynumber' => $request->paynumber[$count],
+//                    'name' => $request->name[$count],
+//                    'card_number' => $request->card_number[$count],
+//                    'issue_date' => $request->issue_date[$count],
+//                    'allocation' => $request->allocation[$count],
+//                    'done_by' => Auth::user()->name,
+//            );
+//            $insert_data[] = $data;
+        }
+
+//        DB::table('food_distributions')->insert($insert_data);
+
+        return redirect('fdistributions')->with('success','Humber has been distributed successfully.');
     }
+
+    public function searchResponse(Request $request){
+
+        $query = $request->get('term','');
+        $products=DB::table('users')
+                    ->join('allocations','users.paynumber','=','allocations.paynumber');
+        if($request->type=='paynumber'){
+            $products->where('users.paynumber','LIKE','%'.$query.'%')
+                    ->where('food_allocation',1);
+        }
+        $products=$products->get();
+        $data=array();
+        foreach ($products as $product) {
+            $data[]=array('paynumber'=>$product->paynumber,
+                'department'=>$product->department,
+                'name'=>$product->name,
+                'allocation'=>$product->allocation,
+            );
+        }
+        if(count($data))
+            return $data;
+        else
+            return ['paynumber'=>'','department'=>'','name'=>'','allocation'=>''];
+    }
+
 }
