@@ -34,6 +34,8 @@ class User extends Authenticatable
         'email',
         'password',
         'activated',
+        'fcount',
+        'mcount',
     ];
 
     /**

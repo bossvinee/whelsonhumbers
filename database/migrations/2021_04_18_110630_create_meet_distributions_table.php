@@ -20,8 +20,14 @@ class CreateMeetDistributionsTable extends Migration
             $table->string('name');
             $table->string('card_number');
             $table->date('issue_date');
-            $table->string('month');
-            $table->string('collected_by')->default('self');
+            $table->string('allocation');
+            $table->string('done_by');
+            $table->string('status')->default('Not Collected');
+            $table->date('date_collected')->nullable();
+            $table->string('collected_by')->default('SELF');
+            $table->string('id_number')->nullable();
+            $table->string('meet_a');
+            $table->string('meet_b');
             $table->softDeletes();
             $table->timestamps();
         });

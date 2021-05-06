@@ -28,4 +28,12 @@ class Allocation extends Model
         return $this->belongsTo(User::class,'paynumber','paynumber');
     }
 
+    public function fdistribution(){
+        return $this->hasOne(FoodDistribution::class,'paynumber','paynumber');
+    }
+
+    public function mdistribution(){
+        return $this->hasOne(MeetDistribution::class,'paynumber','paynumber');
+    }
+
 }

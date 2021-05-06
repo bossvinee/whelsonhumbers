@@ -41,9 +41,6 @@ class FoodCollectionController extends Controller
      */
     public function store(Request $request)
     {
-        $distribution = FoodDistribution::where('paynumber',$request->paynumber)
-                                        ->where('allocation',$request->distribution)
-                                        ->first();
 
         $validator = Validator::make($request->all(),[
             'paynumber' => 'required',
@@ -56,6 +53,10 @@ class FoodCollectionController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
+        $distribution = FoodDistribution::where('paynumber',$request->paynumber)
+            ->where('allocation',$request->distribution)
+            ->first();
+
         // check if collected by is supplied by
         if (!empty($request->collected_by) || $request->collected_by !== null) {
 
@@ -64,7 +65,7 @@ class FoodCollectionController extends Controller
             } else {
 
                 if ($distribution) {
-
+                    $distribution->date_collected = $request->date_collected;
                     $distribution->status = "Collected";
                     $distribution->collected_by = $request->collected_by;
                     $distribution->id_number = $request->id_number;

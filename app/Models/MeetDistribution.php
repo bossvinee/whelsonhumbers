@@ -19,7 +19,18 @@ class MeetDistribution extends Model
         'name',
         'card_number',
         'issue_date',
-        'month',
+        'allocation',
+        'done_by',
+        'status',
+        'date_collected',
         'collected_by',
+        'meet_a',
+        'meet_b',
+        'id_number',
     ];
+
+    public function allocation(){
+        return $this->belongsTo(Allocation::class,'paynumber','paynumber');
+    }
+
 }
