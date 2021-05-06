@@ -85,6 +85,8 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::post('jobcard-report-post','App\Http\Controllers\ReportsController@jobcardReportPost');
     Route::get('month-report','App\Http\Controllers\ReportsController@getMonthlyReport');
     Route::post('month-report-post','App\Http\Controllers\ReportsController@getMonthlyReportPost');
+    Route::get('user-report','App\Http\Controllers\ReportsController@getUserReport');
+    Route::post('user-report-post','App\Http\Controllers\ReportsController@getUserReportPost');
 });
 
 Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger\App\Http\Controllers', 'middleware' => ['web', 'auth', 'activity','role:admin']], function () {

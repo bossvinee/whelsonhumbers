@@ -20,10 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e1ca792-0195-476d-93e5-aea6a5b6a380" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/fooddistribution/draft2.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/reports/user-collection.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FoodDistributionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FoodDistributionsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dash_resource/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/dash_resource/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/fooddistribution/multi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fooddistribution/multi.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/fooddistribution/collection.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fooddistribution/collection.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reports/jobcard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reports/jobcard.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -179,7 +182,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -203,6 +208,7 @@
       <workItem from="1620199957731" duration="21043000" />
       <workItem from="1620236028653" duration="1183000" />
       <workItem from="1620280119574" duration="1113000" />
+      <workItem from="1620281999488" duration="4489000" />
     </task>
     <servers />
   </component>

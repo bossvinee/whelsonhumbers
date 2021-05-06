@@ -15,6 +15,8 @@
             </a>
           </li>
 
+            <div class="pcoded-navigation-label">Users</div>
+
           <li class="pcoded-hasmenu">
             <a
               href="javascript:void(0)"
@@ -109,6 +111,7 @@
               </li>
             </ul>
           </li>
+            <div class="pcoded-navigation-label">Distribution</div>
           <li class="pcoded-hasmenu">
             <a
               href="javascript:void(0)"
@@ -322,6 +325,8 @@
             </ul>
           </li>
 
+            <div class="pcoded-navigation-label">Admin Menu</div>
+
           <li class="pcoded-hasmenu">
             <a
               href="javascript:void(0)"
@@ -333,6 +338,14 @@
               <span class="pcoded-mtext">Reports</span>
             </a>
             <ul class="pcoded-submenu">
+                <li class="">
+                    <a
+                        href="{{ url('user-report') }}"
+                        class="waves-effect waves-dark"
+                    >
+                        <span class="pcoded-mtext">User Collection</span>
+                    </a>
+                </li>
               <li class="">
                 <a
                   href="{{ url('month-report') }}"
@@ -358,9 +371,9 @@
               class="waves-effect waves-dark"
             >
               <span class="pcoded-micon">
-                <i class="feather icon-menu"></i>
+                <i class="fa fa-cogs"></i>
               </span>
-              <span class="pcoded-mtext">Navigation</span>
+              <span class="pcoded-mtext">System</span>
             </a>
           </li>
         </ul>

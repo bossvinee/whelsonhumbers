@@ -24,10 +24,10 @@
                         ></a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ url('fdistributions') }}">Food Collection</a>
+                        <a href="{{ url('fcollection') }}">Food Collection</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ url('fdistributions/create') }}">Add New Collection</a>
+                        <a href="{{ url('fcollection/create') }}">Add New Collection</a>
                     </li>
                 </ul>
             </div>
@@ -116,7 +116,7 @@
                                         >Collected By: </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" name="collected_by" id="collected_by" class="form-control @error('collected_by') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" name="collected_by" id="collected_by" class="form-control @error('collected_by') is-invalid @enderror" placeholder="e.g Vincent Marufu" />
                                     </div>
                                     @error('collected_by')
                                         <span class="invalid-feedback" role="alert">
@@ -129,7 +129,7 @@
                                         >ID Number : </label
                                     >
                                     <div class="col-sm-10">
-                                        <input type="text" name="id_number" id="id_number" class="form-control @error('id_number') is-invalid @enderror" placeholder="e.g Accounts" required="" />
+                                        <input type="text" name="id_number" id="id_number" class="form-control @error('id_number') is-invalid @enderror" placeholder="e.g 63-3027341W07"  />
                                     </div>
                                     @error('id_number')
                                         <span class="invalid-feedback" role="alert">
@@ -139,7 +139,7 @@
                                 </div>
 
                                 <div class="form-group row justify-content-end">
-                                    <button class="btn waves-effect btn-round waves-light btn-sm mr-4 btn-primary">Create Distribution</button>
+                                    <button class="btn waves-effect btn-round waves-light btn-sm mr-4 btn-primary">Add Collection</button>
                                 </div>
                             </form>
                         </div>

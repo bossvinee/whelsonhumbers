@@ -17,7 +17,7 @@
         <div class="col-lg-8">
             <div class="page-header-title">
                 <div class="d-inline">
-                    <h5>Food Distribution</h5>
+                    <h5>Reports</h5>
                     <span class="pcoded-mtext"> Generate Report using Job Card</span>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                                             @endif
                                         </select>
                                     </div>
-                                    @error('select_type')
+                                    @error('card_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong> {{ $message }}</strong>
                                         </span>

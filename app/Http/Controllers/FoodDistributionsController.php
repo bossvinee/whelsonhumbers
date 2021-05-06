@@ -378,36 +378,57 @@ class FoodDistributionsController extends Controller
 
             $jobcard = Jobcard::where('card_number',$request->card_number[$count])->first();
 
-            if ($jobcard->remaining > 0) {
+            if ($jobcard) {
 
-                $distribution = FoodDistribution::create([
-                    'department' => $request->department[$count],
-                    'paynumber' => $request->paynumber[$count],
-                    'name' => $request->name[$count],
-                    'card_number' => $request->card_number[$count],
-                    'issue_date' => $request->issue_date[$count],
-                    'allocation' => $request->allocation[$count],
-                    'done_by' => Auth::user()->name,
+                if ($jobcard->remaining > 0) {
 
-                ]);
-                $distribution->save();
+                    $allocation_month = Allocation::where('paynumber',$request->paynumber[$count])
+                        ->where('allocation',$request->allocation[$count])
+                        ->first();
 
-            } else {
-                return redirect('jobcards')->with('error','System was unable to complete the distribution. Please open a new jobcard');
+                    if ($allocation_month->food_allocation >=1) {
+
+                        $distribution = FoodDistribution::create([
+                            'department' => $request->department[$count],
+                            'paynumber' => $request->paynumber[$count],
+                            'name' => $request->name[$count],
+                            'card_number' => $request->card_number[$count],
+                            'issue_date' => $request->issue_date[$count],
+                            'allocation' => $request->allocation[$count],
+                            'done_by' => Auth::user()->name,
+
+                        ]);
+                        $distribution->save();
+
+                        if($distribution->save()) {
+                            if ($request->allocation[$count] === $jobcard->card_month) {
+                                $jobcard->issued += 1;
+                                $jobcard->remaining -= 1;
+                                $jobcard->save();
+
+                            } else {
+
+                                $jobcard->remaining -= 1;
+                                $jobcard->extras_previous += 1;
+                                $jobcard->save();
+                            }
+
+                            $allocation_month->food_allocation -= 1;
+                            $allocation_month->status = "issued";
+                            $allocation_month->save();
+                        }
+                    }
+
+                } else {
+                    return redirect('jobcards')->with('error','System was unable to complete the distribution. Please open a new jobcard');
+                }
+
+            }else {
+
+                return back()->with('error','Jobcard does not exist');
             }
-//            $data = array(
-//                    'department' => $request->department[$count],
-//                    'paynumber' => $request->paynumber[$count],
-//                    'name' => $request->name[$count],
-//                    'card_number' => $request->card_number[$count],
-//                    'issue_date' => $request->issue_date[$count],
-//                    'allocation' => $request->allocation[$count],
-//                    'done_by' => Auth::user()->name,
-//            );
-//            $insert_data[] = $data;
-        }
 
-//        DB::table('food_distributions')->insert($insert_data);
+        }
 
         return redirect('fdistributions')->with('success','Humber has been distributed successfully.');
     }

@@ -65,5 +65,24 @@ class ReportsController extends Controller
         return view('reports.month',compact('collections','months','month'));
     }
 
+    public function getUserReport() {
+
+        $users = User::all();
+        return view('reports.user-collection',compact('users'));
+    }
+    public function getUserReportPost(Request $request) {
+        $users = User::all();
+        $validator = Validator::make($request->all(),[
+            'paynumber' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $user_collections = FoodDistribution::where('paynumber',$request->paynumber)->where('status','=','Collected')->get();
+        return view('reports.user-collection',compact('users','user_collections'));
+    }
+
 
 }
