@@ -21,13 +21,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3e1ca792-0195-476d-93e5-aea6a5b6a380" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FoodCollectionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FoodCollectionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Allocation.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Allocation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/FoodDistribution.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/FoodDistribution.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/MeetDistribution.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/MeetDistribution.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_18_110630_create_meet_distributions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_18_110630_create_meet_distributions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FoodDistributionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FoodDistributionsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MeetDistributionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MeetDistributionsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Imports/FoodDistributionImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/FoodDistributionImport.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/fooddistribution/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fooddistribution/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/jobcards/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jobcards/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/meetdistribution/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/meetdistribution/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/meetdistribution/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/meetdistribution/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,7 +195,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="D:/Portfolio/School Management System/grange" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.php.debug.servers" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -214,7 +217,8 @@
       <workItem from="1620199957731" duration="21043000" />
       <workItem from="1620236028653" duration="1183000" />
       <workItem from="1620280119574" duration="1113000" />
-      <workItem from="1620281999488" duration="6629000" />
+      <workItem from="1620281999488" duration="6833000" />
+      <workItem from="1620629371503" duration="1135000" />
     </task>
     <servers />
   </component>
@@ -238,6 +242,10 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="300" y="85" key="#CLI_Interpreters/0.0.1440.860@0.0.1440.860" timestamp="1620212209819" />
+    <state x="500" y="190" key="FileChooserDialogImpl" timestamp="1620632474387">
+      <screen x="0" y="0" width="1440" height="870" />
+    </state>
+    <state x="500" y="190" key="FileChooserDialogImpl/0.0.1440.870@0.0.1440.870" timestamp="1620632474387" />
     <state x="221" y="75" key="SettingsEditor" timestamp="1620287159138">
       <screen x="0" y="0" width="1440" height="860" />
     </state>

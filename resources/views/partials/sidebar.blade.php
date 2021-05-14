@@ -308,7 +308,7 @@
             <ul class="pcoded-submenu">
               <li class="">
                 <a
-                  href="menu-bottom.html"
+                  href="{{ url('mdistributions/create') }}"
                   class="waves-effect waves-dark"
                 >
                   <span class="pcoded-mtext">Add New</span>
@@ -316,10 +316,18 @@
               </li>
               <li class="">
                 <a
-                  href="menu-bottom.html"
+                  href="{{ url('meet-import') }}"
                   class="waves-effect waves-dark"
                 >
-                  <span class="pcoded-mtext">Manage Distribution</span>
+                  <span class="pcoded-mtext">Import Distribution</span>
+                </a>
+              </li>
+              <li class="">
+                <a
+                  href="{{ url('mdistributions') }}"
+                  class="waves-effect waves-dark"
+                >
+                  <span class="pcoded-mtext">Distribution</span>
                 </a>
               </li>
             </ul>

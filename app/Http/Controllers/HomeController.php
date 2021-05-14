@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jobcard;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $curr_month = date('FY');
+        $jobcards = Jobcard::orderBy('created_at', 'ASC')
+                            ->where('card_type','=','food')
+                            ->where('card_month',$curr_month)->get();
+        return view('home',compact('jobcards'));
     }
 }

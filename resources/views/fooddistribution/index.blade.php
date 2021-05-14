@@ -63,8 +63,6 @@
                                   <th>Issue Date</th>
                                   <th>Month</th>
                                   <th>Status</th>
-                                  <th>Collected By</th>
-                                  <th>ID Number</th>
                                   <th>Done By</th>
                                   <th>Action</th>
                                 </tr>
@@ -93,8 +91,6 @@
                                                     >{{ $distribution->status }}</span
                                                 >
                                             </td>
-                                            <td>{{ $distribution->collected_by }}</td>
-                                            <td>{{ $distribution->id_number }}</td>
                                             <td>{{ $distribution->done_by }}</td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ url('add-collection/'.$distribution->id) }}" data-toggle="tooltip" title="Add to collection" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>

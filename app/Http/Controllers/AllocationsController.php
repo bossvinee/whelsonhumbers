@@ -66,29 +66,39 @@ class AllocationsController extends Controller
                             ->where('allocations.paynumber',$user->paynumber)
                             ->get();
 
-            $user_allocation = DB::table('allocations')
-                            ->where('paynumber',$user->paynumber)
-                            ->where('allocation',$request->allocation)
-                            ->get();
-
             if($user_alloc->count() > 0) {
 
-                if($user_allocation->count() == 0)
-                {
+                $allocation_mon = DB::table('allocations')
+                            ->where('paynumber',$user->paynumber)
+                            ->where('allocation',$request->allocation)
+                            ->first();
+
+                if ($allocation_mon) {
+
+                    return back()->with('error','The user has already been allocated.');
+                }else {
+
                     $allocation = Allocation::create([
                         'paynumber' => $request->input('paynumber'),
                         'allocation' => strip_tags($request->input('allocation')),
-                        'meet_a' => $user_alloc->meet_a,
-                        'meet_b' => $user_alloc->meet_b,
+                        'meet_a' => $request->input('meet_a'),
+                        'meet_b' => $request->input('meet_b'),
                         'meet_allocation' => 1,
                         'food_allocation' => 1,
-
                     ]);
                     $allocation->save();
 
-                    return redirect('allocations')->with('success','User has been allocated successfully');
-                }else {
-                    return back()->with('error','The user has already been allocated.');
+                    if($allocation->save()) {
+
+                        $user->fcount += 1;
+                        $user->mcount += 1;
+                        $user->save();
+
+                        return redirect('allocations')->with('success','User has been allocated successfully');
+                    }else {
+
+                        return back()->with('error','User could not be allocated');
+                    }
                 }
 
             } else {
@@ -103,7 +113,17 @@ class AllocationsController extends Controller
                 ]);
                 $allocation->save();
 
-                return redirect('allocations')->with('success','User has been allocated successfully');
+                if($allocation->save()) {
+
+                    $user->fcount += 1;
+                    $user->mcount += 1;
+                    $user->save();
+
+                    return redirect('allocations')->with('success','User has been allocated successfully');
+                }else {
+
+                    return back()->with('error','User could not be allocated');
+                }
             }
         }
 

@@ -64,9 +64,10 @@
                                   <th>Name</th>
                                   <th>Pay Number</th>
                                   <th>Name</th>
-                                  <th>Email</th>
                                   <th>Department</th>
                                   <th>User Type</th>
+                                  <th>Food</th>
+                                  <th>Meat</th>
                                   <th>Role</th>
                                   <th>Action</th>
                                 </tr>
@@ -79,9 +80,10 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->paynumber }}</td>
                                             <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                                            <td>{{ $user->email }}</td>
                                             <td>{{ $user->department }}</td>
                                             <td>{{ $user->usertype }}</td>
+                                            <td>{{ $user->fcount }}</td>
+                                            <td>{{ $user->mcount }}</td>
                                             <td>
                                                 @foreach ($user->roles as $user_role)
                                                     @if ($user_role->name == 'User')

@@ -59,7 +59,7 @@
                                             <option value="">Please select paynumber</option>
                                             @if ($users)
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user->paynumber }}"> {{ $user->paynumber }}</option>
+                                                    <option value="{{ $user->paynumber }}"> {{ $user->paynumber }} - {{ $user->name }}</option>
                                                 @endforeach
                                             @endif
                                         </select>

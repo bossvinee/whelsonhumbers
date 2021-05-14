@@ -50,7 +50,7 @@ class FoodDistributionsController extends Controller
     public function store(Request $request)
     {
 
-        $getcard = Jobcard::where('card_number',$request->card_number)->first();
+        $getcard = Jobcard::where('card_number',$request->card_number)->where('card_type','=','food')->first();
         $user = User::where('paynumber',$request->paynumber)->first();
 
         $validator = Validator::make($request->all(),[
@@ -217,7 +217,7 @@ class FoodDistributionsController extends Controller
 
             foreach ($users as $user) {
 
-                $jobcard = Jobcard::where('card_number',$request->card_number)->first();
+                $jobcard = Jobcard::where('card_number',$request->card_number)->where('card_type','=','food')->first();
 
                 if($jobcard->remaining > 0) {
 
@@ -298,24 +298,49 @@ class FoodDistributionsController extends Controller
 
             foreach ($users as $user) {
 
-                if ($user->allocation) {
+                $jobcard = Jobcard::where('card_number',$request->card_number)->where('card_type','=','food')->first();
 
-                    $user_allocation = Allocation::where('allocation',$request->month)->where('paynumber',$user->paynumber)->first();
+                if ($jobcard->remaining > 0) {
+                    if ($user->allocation) {
 
-                    if ($user_allocation )
-                    {
-                        $distributor = FoodDistribution::create([
-                            'department' => $user->department,
-                            'paynumber' => $user->paynumber,
-                            'name' => $user->name,
-                            'card_number' => $request->input('card_number'),
-                            'issue_date' => $request->input('issue_date'),
-                            'allocation' => $request->input('month'),
-                            'done_by' => Auth::user()->name,
-                        ]);
-                        $distributor->save();
-                    } else {
-                        continue;
+                        $user_allocation = Allocation::where('allocation',$request->month)->where('paynumber',$user->paynumber)->first();
+
+                        if ($user_allocation )
+                        {
+                            $distributor = FoodDistribution::create([
+                                'department' => $user->department,
+                                'paynumber' => $user->paynumber,
+                                'name' => $user->name,
+                                'card_number' => $request->input('card_number'),
+                                'issue_date' => $request->input('issue_date'),
+                                'allocation' => $user_allocation->allocation,
+                                'done_by' => Auth::user()->name,
+                            ]);
+                            $distributor->save();
+
+                            if($distributor->save())
+                            {
+                                if($request->month === $jobcard->card_month)
+                                {
+                                    $jobcard->issued += 1;
+                                    $jobcard->remaining -= 1;
+                                    $jobcard->save();
+
+                                }else {
+
+                                    $jobcard->remaining -= 1;
+                                    $jobcard->extras_previous += 1;
+                                    $jobcard->save();
+                                }
+
+                                $user_allocation->food_allocation -= 1;
+                                $user_allocation->status = "issued";
+                                $user_allocation->save();
+
+                            }
+                        } else {
+                            continue;
+                        }
                     }
                 }
             }
@@ -376,7 +401,7 @@ class FoodDistributionsController extends Controller
         $count = 0;
         for ($count; $count < count($request->paynumber); $count++) {
 
-            $jobcard = Jobcard::where('card_number',$request->card_number[$count])->first();
+            $jobcard = Jobcard::where('card_number',$request->card_number[$count])->where('card_type','=','food')->first();
 
             if ($jobcard) {
 
@@ -401,6 +426,11 @@ class FoodDistributionsController extends Controller
                         $distribution->save();
 
                         if($distribution->save()) {
+
+                            $user = User::where('paynumber',$request->paynumber[$count])->first();
+                            $user->fcount -= 1;
+                            $user->save();
+
                             if ($request->allocation[$count] === $jobcard->card_month) {
                                 $jobcard->issued += 1;
                                 $jobcard->remaining -= 1;

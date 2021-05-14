@@ -57,7 +57,7 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     // jobcards
     Route::resource('jobcards', 'App\Http\Controllers\JobcardsController');
 
-    //distributions
+    // food distributions
     Route::resource('fdistributions', 'App\Http\Controllers\FoodDistributionsController');
     Route::get('bulk-food-form','App\Http\Controllers\FoodDistributionsController@bulkFoodDistribution');
     Route::post('bulk-food-upload','App\Http\Controllers\FoodDistributionsController@bulkFoodUpload');
@@ -69,7 +69,11 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::post('multi-insert-post','App\Http\Controllers\FoodDistributionsController@multiInsertPost');
     Route::get('searchallocation', 'App\Http\Controllers\FoodDistributionsController@searchResponse');
 
+    // meet ditsribution
     Route::resource('mdistributions', 'App\Http\Controllers\MeetDistributionsController');
+    Route::get('/get-meat-allocation/{paynumber}','App\Http\Controllers\MeetDistributionsController@getMeetAllocation');
+    Route::get('meet-import','App\Http\Controllers\MeetDistributionsController@getDisttibutionImport');
+    Route::post('meet-import-send','App\Http\Controllers\MeetDistributionsController@mdistributionImportSend');
 
     // collections
     Route::resource('fcollection', 'App\Http\Controllers\FoodCollectionController');

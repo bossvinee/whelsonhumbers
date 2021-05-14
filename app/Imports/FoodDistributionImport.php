@@ -24,7 +24,7 @@ class FoodDistributionImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row) {
 
             $user = User::where('paynumber',$row['paynumber'])->first();
-            $getcard = Jobcard::where('card_number',$row['card_number'])->first();
+            $getcard = Jobcard::where('card_number',$row['card_number'])->where('card_type','=','food')->first();
             $remaining = Jobcard::where('card_number',$row['card_number'])->first()->remaining;
 
             if($remaining > 0 )
@@ -71,7 +71,7 @@ class FoodDistributionImport implements ToCollection, WithHeadingRow
                 }
             } else {
 
-                
+
                 return redirect('jobcards')->with('error','System was unable to complete the import please open a new job card ???');
             }
         }

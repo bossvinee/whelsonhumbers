@@ -90,6 +90,9 @@
                                             <option value="February@php echo date('Y') @endphp">February@php echo date('Y') @endphp</option>
                                             <option value="March@php echo date('Y') @endphp">March@php echo date('Y') @endphp</option>
                                             <option value="April@php echo date('Y') @endphp">April@php echo date('Y') @endphp</option>
+                                            <option value="May@php echo date('Y') @endphp">May@php echo date('Y') @endphp</option>
+                                            <option value="June@php echo date('Y') @endphp">June@php echo date('Y') @endphp</option>
+                                            <option value="July@php echo date('Y') @endphp">July@php echo date('Y') @endphp</option>
                                         </select>
                                     </div>
                                     @error('card_month')
@@ -105,8 +108,8 @@
                                     <div class="col-sm-10">
                                         <select name="card_type" id="card_type" class="form-control" style="width: 100%;">
                                             <option value="">Please select jobcard type</option>
-                                            <option value="meet">Meet</option>
-                                            <option value="food">Food</option>
+                                            <option value="meet">Meat Humber</option>
+                                            <option value="food">Food Humber</option>
                                         </select>
                                     </div>
                                     @error('card_type')

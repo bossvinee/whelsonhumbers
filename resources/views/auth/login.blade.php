@@ -68,6 +68,8 @@
 								<button type="submit" class="btn btn-primary btn-block ">{{ __('Login') }}</button>
 							</div>
 						</form>
+                        <p class="text-center" style="margin-bottom: 0;padding-bottom: 0;"><b>Login Credentials</b></p>
+                        <p><b>paynumber</b>: APPS244  <b>password</b>: password</p>
 					</div>
 				</div>
 			</div>
