@@ -19,6 +19,7 @@
                                     <th>Issue Date</th>
                                     <th>Quantity Ordered</th>
                                     <th>Job Card Number</th>
+                                    <th>Wages</th>
                                     <th>Extras / Previous</th>
                                     <th>Total</th>
                                     <th>Balance</th>
@@ -31,6 +32,12 @@
                                             <td>{{ $card->date_opened }}</td>
                                             <td>{{ $card->quantity }}</td>
                                             <td>{{ $card->card_number }}</td>
+                                            <td>
+                                                @php
+                                                    echo App\Models\FoodDistribution::where('card_number',$card->card_number)->get()->count();
+                                                @endphp
+                                                
+                                            </td>
                                             <td>{{ $card->extras_previous }}</td>
                                             <td>{{ $card->extras_previous + $card->issued }}</td>
                                             <td>{{ $card->remaining }}</td>
