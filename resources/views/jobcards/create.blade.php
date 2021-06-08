@@ -47,7 +47,7 @@
                     <div class="col-sm-12">
                       <div class="card">
                         <div class="card-header pb-0">
-                            <h4 style="font-size: 18px;">Create new job card</h4>
+                            <h4 style="font-size:18px;">Create new jobcard <span class="float-right"><a href="{{ url('jobcards') }}" class="btn d-inline btn-sm btn-light btn-round waves-effect waves-dark">Back to Job Cards</a></span></h4>
                         </div>
                         <div class="card-block pt-0 mt-0">
                             <h4 class="sub-title"></h4>
@@ -93,6 +93,11 @@
                                             <option value="May@php echo date('Y') @endphp">May@php echo date('Y') @endphp</option>
                                             <option value="June@php echo date('Y') @endphp">June@php echo date('Y') @endphp</option>
                                             <option value="July@php echo date('Y') @endphp">July@php echo date('Y') @endphp</option>
+                                            <option value="July@php echo date('Y') @endphp">August@php echo date('Y') @endphp</option>
+                                            <option value="July@php echo date('Y') @endphp">September@php echo date('Y') @endphp</option>
+                                            <option value="July@php echo date('Y') @endphp">October@php echo date('Y') @endphp</option>
+                                            <option value="July@php echo date('Y') @endphp">November@php echo date('Y') @endphp</option>
+                                            <option value="July@php echo date('Y') @endphp">Devember@php echo date('Y') @endphp</option>
                                         </select>
                                     </div>
                                     @error('card_month')

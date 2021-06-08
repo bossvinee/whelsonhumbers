@@ -50,7 +50,7 @@
                                     <label for="type" class="col-sm-2 col-form-label"
                                         >User type : </label
                                     >
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-10">
                                         <input type="text" value="{{ $usertype->type }}" name="type" id="type" class="form-control @error('type') is-invalid @enderror" placeholder="e.g Salaried" required="" autofocus />
                                     </div>
                                     @error('type')
@@ -58,9 +58,25 @@
                                             <strong> {{ $message }}</strong>
                                         </span>
                                     @enderror
-
-                                    <div class="col-sm-2">
-                                        <button class="btn waves-effect waves-light btn-sm btn-primary">Update type</button>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="description" class="col-sm-2 col-form-label"
+                                        >Description : </label
+                                    >
+                                    <div class="col-sm-10">
+                                        <textarea name="description" id="description" rows="4" class="form-control @error('description') is-invalid @enderror">
+                                            {{ $usertype->description }}
+                                        </textarea>
+                                    </div>
+                                    @error('description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong> {{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group row justify-content-end">
+                                    <div class="col-md-2 col-sm-12">
+                                        <button class="btn btn-block waves-effect waves-light btn-sm btn-primary">Update type</button>
                                     </div>
                                 </div>
                             </form>

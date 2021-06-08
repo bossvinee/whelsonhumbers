@@ -61,4 +61,12 @@ class User extends Authenticatable
         return $this->hasOne(Allocation::class,'paynumber','paynumber');
     }
 
+    public function department() {
+        return $this->hasOne(Department::class,'department','department');
+    }
+
+    public function usertype() {
+        return $this->hasOne(Usertype::class,'type','usertype');
+    }
+
 }

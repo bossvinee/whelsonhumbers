@@ -78,7 +78,7 @@
                                             </td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ route('departments.edit',$department->id) }}" data-toggle="tooltip" title="Edit Department" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                                <a href="{{ route('departments.show',$department->id) }}" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                <a style="color: #fff;" data-toggle="modal" data-target="#default-Modal" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
                                                 <form method="POST" action="{{ route('departments.destroy',$department->id) }}" role="form" class="d-inline">
                                                     @csrf
                                                     @method("DELETE")
@@ -100,6 +100,8 @@
         </div>
     </div>
 </div>
+
+@include('departments.show')
 
 
 @endsection

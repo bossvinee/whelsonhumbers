@@ -39,6 +39,7 @@ class UsertypesController extends Controller
     {
         $validator = Validator::make($request->all(),[
                 'type' => 'required|unique:usertypes',
+                'description' => 'required'
             ],
         );
 
@@ -48,6 +49,7 @@ class UsertypesController extends Controller
 
         $type = Usertype::create([
             'type' => $request->input('type'),
+            'description' => strip_tags($request->input('description')),
         ]);
         $type->save();
 
@@ -87,6 +89,7 @@ class UsertypesController extends Controller
     {
         $validator = Validator::make($request->all(),[
                 'type' => 'required|unique:usertypes',
+                'description' => 'required',
             ],
         );
 
@@ -95,6 +98,7 @@ class UsertypesController extends Controller
         }
 
         $usertype->type = $request->input('type');
+        $usertype->description = $request->input('description');
         $usertype->save();
 
         return redirect('usertypes')->with('success','Employee type has been updated successfully');

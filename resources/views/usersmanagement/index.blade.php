@@ -65,10 +65,10 @@
                                   <th>Pay Number</th>
                                   <th>Name</th>
                                   <th>Department</th>
-                                  <th>User Type</th>
-                                  <th>Food</th>
-                                  <th>Meat</th>
-                                  <th>Role</th>
+                                  <th>UserType</th>
+                                  <th data-toggle="tooltip" title="Food Allocation Count">F Count</th>
+                                  <th data-toggle="tooltip" title="Meat Allocation Count">M Count</th>
+                                  <th data-toggle="tooltip" title="User Role">Role</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>

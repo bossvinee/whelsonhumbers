@@ -67,7 +67,7 @@
                                             <td>{{ $type->created_at }}</td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ route('usertypes.edit',$type->id) }}" data-toggle="tooltip" title="Edit Usertype" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                                <a href="" data-toggle="tooltip" title="Show Usertype" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                <a style="color: #fff;" data-toggle="modal" data-target="#usertype-Modal" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
                                                 <form action="{{ route('usertypes.destroy',$type->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
@@ -89,6 +89,8 @@
         </div>
     </div>
 </div>
+
+@include('usertypes.show')
 
 @endsection
 

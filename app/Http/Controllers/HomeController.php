@@ -25,9 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         $curr_month = date('FY');
+
         $jobcards = Jobcard::orderBy('created_at', 'ASC')
                             ->where('card_type','=','food')
                             ->where('card_month',$curr_month)->get();
+        $jobcards_count = $jobcards->count();
         return view('home',compact('jobcards'));
     }
 }

@@ -59,7 +59,7 @@ class JobcardsController extends Controller
                 {
                     if($mcard->remaining > 0)
                     {
-                        return back()->with('error','Unable to open jobcard.');
+                        return back()->with("error","Please complete Job card No: $mcard->card_number with pending units.!! ");
                     }else{
                             $jobcard = Jobcard::create([
                                 'card_number' => $request->input('card_number'),
@@ -100,7 +100,7 @@ class JobcardsController extends Controller
                 {
                     if($fcard->remaining > 0)
                     {
-                        return back()->with('error','Unable to open jobcard.');
+                        return back()->with("error","Please complete Job card No: $fcard->card_number with pending units.!! ");
                     }else{
                             $jobcard = Jobcard::create([
                                 'card_number' => $request->input('card_number'),

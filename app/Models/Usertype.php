@@ -11,5 +11,10 @@ class Usertype extends Model
 
     protected $fillable = [
         'type',
+        'description'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class,'usertype','type');
+    }
 }

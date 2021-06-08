@@ -1,86 +1,101 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
-    {{-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-	<link rel="stylesheet" href="{{ asset('as_login/css/style.css') }}">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Login | Food Humber Distribution </title>
+    <link rel="icon" type="image/x-icon" href="{{asset('assets/img/favicon.ico')}}"/>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{{ asset('as_login/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('as_login/assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('as_login/assets/css/authentication/form-1.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('as_login/assets/css/forms/theme-checkbox-radio.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('as_login/assets/css/forms/switches.css') }}">
 </head>
 
-<body>
-	<section class="ftco-section">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-md-6 col-lg-5">
-					<div class="login-wrap p-4 p-md-5">
-						<div class="icon d-flex align-items-center justify-content-center">
-							<span class="fa fa-user-o"></span>
-						</div>
+<style>
+    .fixed {
+  position: fixed;
+  bottom: 2%;
+  left: 15%;
+  width: 300px;
+}
+</style>
+<body class="form">
 
-						<form action="{{ route('login') }}" method="POST" class="login-form">
-                            @csrf
-							<div class="form-group">
-								<input id="paynumber" type="text" class="form-control rounded-left @error('paynumber') is-invalid @enderror" name="login" value="{{ old('paynumber') }}" placeholder="{{ __('Pay Number') }}" required autocomplete="paynumber">
-                                @error('paynumber')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+
+<div class="form-container">
+    <div class="form-form">
+        <div class="form-form-wrap">
+            <div class="form-container">
+                <div class="form-content">
+
+                    <h1 style="font-size:26px;" class=""><span class="brand-name"> Whelson Food Distribution</span></h1>
+
+                    <form class="text-left" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form">
+
+                            <div id="username-field" class="field-wrapper input">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+
+                                <input id="paynumber" type="text" class="form-control{{ $errors->has('paynumber') ? ' is-invalid' : '' }}" name="login" value="{{ old('paynumber') }}" required autofocus placeholder="{{ __('Pay Number') }}" autocomplete="paynumber">
+
+                                @if ($errors->has('paynumber'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('paynumber') }}</strong>
                                     </span>
-                                @enderror
-							</div>
-							<div class="form-group d-flex">
-								<input type="password" class="form-control rounded-left @error('password') is-invalid @enderror" placeholder="Password" name="password" id="password" autocomplete="current-password"
-									required>
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                @endif
+                            </div>
+
+                            <div id="password-field" class="field-wrapper input mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @enderror
-							</div>
+                                @endif
+                            </div>
+                            <div class="d-sm-flex justify-content-between">
+                                <div class="field-wrapper toggle-pass">
+                                    <p class="d-inline-block">Show Password</p>
+                                    <label class="switch s-primary">
+                                        <input type="checkbox" id="toggle-password" class="d-none">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                                <div class="field-wrapper">
+                                    <button type="submit" class="btn btn-primary" value="">Log In</button>
+                                </div>
 
-							<div class="form-group d-md-flex">
-								<div class="w-50">
-									<label class="checkbox-wrap checkbox-primary">Remember Me
-										<input type="checkbox" checked name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-										<span class="checkmark"></span>
-									</label>
-								</div>
-								<div class="w-50 text-md-right">
-                                    @if (Route::has('password.request'))
-                                        <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
-                                    @endif
+                            </div>
 
-								</div>
-							</div>
-							<div class="form-group d-flex">
-								<button type="submit" class="btn btn-primary btn-block ">{{ __('Login') }}</button>
-							</div>
-						</form>
-                        <p class="text-center" style="margin-bottom: 0;padding-bottom: 0;"><b>Login Credentials</b></p>
-                        <p><b>paynumber</b>: APPS244  <b>password</b>: password</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                            <div class="field-wrapper">
+                                @if(Route::has('password.request'))
+                                    <a href="{{ route('password.request') }}" class="forgot-pass-link">Forgot Password?</a>
+                                @endif
+                            </div>
 
-	<script src="{{ asset('as_login/js/jquery.min.js') }}"></script>
-	<script src="{{ asset('as_login/js/popper.js') }}"></script>
-	<script src="{{ asset('as_login/js/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('as_login/js/main.js') }}"></script>
+                        </div>
+                    </form>
+                    <p class=" fixed terms-conditions"> Whelson IT © <?php echo date('Y'); ?> All Rights Reserved.</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-image">
+        <div class="l-image">
+        </div>
+    </div>
+</div>
+<script src=" {{ asset('as_login/assets/js/libs/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ asset('as_login/bootstrap/js/popper.min.js') }}"></script>
+<script src="{{ asset('as_login/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('as_login/assets/js/authentication/form-1.js') }} "></script>
 
 </body>
-
 </html>
