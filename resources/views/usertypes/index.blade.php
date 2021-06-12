@@ -67,7 +67,7 @@
                                             <td>{{ $type->created_at }}</td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ route('usertypes.edit',$type->id) }}" data-toggle="tooltip" title="Edit Usertype" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                                <a style="color: #fff;" data-toggle="modal" data-target="#usertype-Modal" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                <button type="button" class="d-inline btn-sm btn btn-success" data-toggle="modal" data-target="#showJobcard" data-usertype="{{ $type->type }}" data-description="{{ $type->description }}" ><i class="fa fa-eye"></i></button>
                                                 <form action="{{ route('usertypes.destroy',$type->id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
@@ -107,4 +107,16 @@
 <script src="{{ asset('dash_resource/js/datatables.bootstrap4.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/datatables.responsive.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/extension-btns-custom.js') }}" type="text/javascript"></script>
+
+<script>
+    $('#showJobcard').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var usertype = button.data('usertype')
+        var description = button.data('description')
+        var modal = $(this)
+        modal.find('.modal-title').text('Show : ' + usertype)
+        modal.find('.usertype').text(usertype)
+        modal.find('.description').text(description)
+    })
+</script>
 @endsection

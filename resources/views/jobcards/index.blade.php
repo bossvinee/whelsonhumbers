@@ -79,14 +79,14 @@
                                             <td>{{ $jobcard->card_number }}</td>
                                             <td>{{ $jobcard->date_opened }}</td>
                                             <td>{{ $jobcard->card_month }}</td>
-                                            <td>{{ $jobcard->card_type }}</td>
+                                            <td style="text-transform: capitalize;">{{ $jobcard->card_type }}</td>
                                             <td>{{ $jobcard->quantity }}</td>
                                             <td>{{ $jobcard->issued }}</td>
                                             <td>{{ $jobcard->remaining }}</td>
                                             <td>{{ $jobcard->extras_previous }}</td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ route('jobcards.edit',$jobcard->id) }}" data-toggle="tooltip" title="Edit Jobcard" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                                <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                <button type="button" class="d-inline btn-sm btn btn-success" data-toggle="modal" data-target="#showJobcard" data-issued="{{ $jobcard->issued }}" data-quantity="{{ $jobcard->quantity }}" data-month="{{ $jobcard->card_month }}" data-dateopened="{{ $jobcard->date_opened }}" data-cardnumber="{{ $jobcard->card_number }}"><i class="fa fa-eye"></i></button>
                                                 <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
                                             </td>
                                         </tr>
@@ -104,9 +104,13 @@
     </div>
 </div>
 
+@include('jobcards.show')
+
 @endsection
 
 @section('footer_scripts')
+
+
 <script src="{{ asset('dash_resource/js/jquery.datatables.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/datatables.buttons.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/jszip.min.js') }}" type="text/javascript"></script>
@@ -119,4 +123,23 @@
 <script src="{{ asset('dash_resource/js/datatables.bootstrap4.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/datatables.responsive.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('dash_resource/js/extension-btns-custom.js') }}" type="text/javascript"></script>
+
+<script>
+   $('#showJobcard').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var cardnumber = button.data('cardnumber')
+        var dateopened = button.data('dateopened')
+        var month = button.data('month')
+        var quantity = button.data('quantity')
+        var issued = button.data('issued')
+        var modal = $(this)
+        modal.find('.modal-title').text('Show Jobcard No:  ' + cardnumber)
+        modal.find('.card-number').text(cardnumber)
+        modal.find('.date-opened').text(dateopened)
+        modal.find('.month').text(month)
+        modal.find('.quantity').text(quantity)
+        modal.find('.issued').text(issued)
+    })
+</script>
+
 @endsection

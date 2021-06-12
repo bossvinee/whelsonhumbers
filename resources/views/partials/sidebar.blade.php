@@ -163,7 +163,7 @@
                     </ul>
                 </li>
 
-                <div class="pcoded-navigation-label">Distribution</div>
+                <div class="pcoded-navigation-label">Allocations</div>
 
                 <li class="pcoded-hasmenu">
                     <a
@@ -209,6 +209,8 @@
                     </li>
                     </ul>
                 </li>
+
+                <div class="pcoded-navigation-label">Food Distribution</div>
 
                 <li class="pcoded-hasmenu">
                     <a
@@ -258,7 +260,7 @@
                         href="{{ url('fdistributions') }}"
                         class="waves-effect waves-dark"
                         >
-                        <span class="pcoded-mtext">Deleted Distribution</span>
+                        <span class="pcoded-mtext">Deleted Distributions</span>
                         </a>
                     </li>
                     <li class="">
@@ -266,7 +268,7 @@
                         href="{{ url('fdistributions') }}"
                         class="waves-effect waves-dark"
                         >
-                        <span class="pcoded-mtext">Distribution</span>
+                        <span class="pcoded-mtext">Manage Distribution</span>
                         </a>
                     </li>
                     <li class="pcoded-hasmenu">
@@ -274,7 +276,7 @@
                         href="javascript:void(0)"
                         class="waves-effect waves-dark"
                         >
-                        <span class="pcoded-mtext">Collection</span>
+                        <span class="pcoded-mtext">Food Collection</span>
                         </a>
                         <ul class="pcoded-submenu">
                         <li class="">
@@ -298,6 +300,8 @@
                     </ul>
                 </li>
 
+                <div class="pcoded-navigation-label">Meet Distribution</div>
+
                 <li class="pcoded-hasmenu">
                     <a
                     href="javascript:void(0)"
@@ -309,30 +313,38 @@
                     <span class="pcoded-mtext">Meet Distribution</span>
                     </a>
                     <ul class="pcoded-submenu">
-                    <li class="">
-                        <a
-                        href="{{ url('mdistributions/create') }}"
-                        class="waves-effect waves-dark"
-                        >
-                        <span class="pcoded-mtext">Add New</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a
-                        href="{{ url('meet-import') }}"
-                        class="waves-effect waves-dark"
-                        >
-                        <span class="pcoded-mtext">Import Distribution</span>
-                        </a>
-                    </li>
-                    <li class="">
-                        <a
-                        href="{{ url('mdistributions') }}"
-                        class="waves-effect waves-dark"
-                        >
-                        <span class="pcoded-mtext">Distribution</span>
-                        </a>
-                    </li>
+                        <li class="">
+                            <a
+                            href="{{ url('mdistributions/create') }}"
+                            class="waves-effect waves-dark"
+                            >
+                            <span class="pcoded-mtext">Add New</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a
+                            href="{{ url('meet-import') }}"
+                            class="waves-effect waves-dark"
+                            >
+                            <span class="pcoded-mtext">Import Distribution</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a
+                            href="{{ url('mdistributions') }}"
+                            class="waves-effect waves-dark"
+                            >
+                            <span class="pcoded-mtext"> Manage Distribution</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a
+                                href=""
+                                class="waves-effect waves-dark"
+                            >
+                                <span class="pcoded-mtext"> Deleted Distributions</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 

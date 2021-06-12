@@ -21,16 +21,14 @@
   <component name="ChangeListManager">
     <list default="true" id="3e1ca792-0195-476d-93e5-aea6a5b6a380" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FoodDistributionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FoodDistributionsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MeetDistributionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MeetDistributionsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Imports/FoodDistributionImport.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Imports/FoodDistributionImport.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/fooddistribution/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fooddistribution/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/jobcards/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jobcards/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/meetdistribution/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/meetdistribution/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/meetdistribution/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/meetdistribution/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JobcardsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JobcardsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/departments/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/departments/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/departments/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/departments/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/jobcards/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jobcards/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/jobcards/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jobcards/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/usertypes/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/usertypes/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/usertypes/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/usertypes/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +193,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/Portfolio/School Management System/grange" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="settings.php.debug.servers" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -219,6 +217,7 @@
       <workItem from="1620280119574" duration="1113000" />
       <workItem from="1620281999488" duration="6833000" />
       <workItem from="1620629371503" duration="1135000" />
+      <workItem from="1623476956315" duration="6558000" />
     </task>
     <servers />
   </component>
