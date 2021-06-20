@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Allocation;
+use App\Models\FoodDistribution;
 use Illuminate\Http\Request;
 
-class SoftDeleteAllocations extends Controller
+class SoftDeleteFoodDistributionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,8 @@ class SoftDeleteAllocations extends Controller
      */
     public function index()
     {
-        return view('allocations.deleted-allocations');
+        $fdists = FoodDistribution::onlyTrashed()->get();
+        return view('fooddistribution.deteted-distrubutions',compact('fdists'));
     }
 
     /**
@@ -68,7 +71,26 @@ class SoftDeleteAllocations extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fdist = FoodDistribution::withTrashed()->where('id',$id)->first();
+        $fdist->save();
+        $fdist->restore();
+
+        if ($fdist->restore())
+        {
+            $allocation = Allocation::where('paynumber',$fdist->paynumber)->first();
+            $allocation->status = "issued";
+            $allocation->food_allocation -= 1;
+            $allocation->save();
+
+            return redirect('fdistributions')->with('success','Distribution has been restored successfully');
+        }
+        else
+        {
+            return back()->with('error','Error occured while processing distrribution !!.');
+        }
+
+        return redirect('fdistributions')->with('error','Distribution could not be restored properly.');
+
     }
 
     /**
@@ -79,6 +101,9 @@ class SoftDeleteAllocations extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fdist = FoodDistribution::withTrashed()->where('id',$id)->first();
+        $fdist->forceDelete();
+
+        return redirect('fdistributions')->with('success','Distribution has been deleted Successfully');
     }
 }

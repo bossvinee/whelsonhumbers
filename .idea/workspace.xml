@@ -20,15 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e1ca792-0195-476d-93e5-aea6a5b6a380" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/allocations/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/jobcards/deleted-jobcards.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AllocationsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AllocationsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FoodDistributionsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FoodDistributionsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/JobcardsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/JobcardsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/departments/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/departments/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/departments/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/departments/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SoftDeleteAllocations.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SoftDeleteJobcardsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SoftDeleteJobcardsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/FoodDistribution.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/FoodDistribution.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allocations/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allocations/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allocations/deleted-allocations.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allocations/deleted-allocations.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allocations/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allocations/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allocations/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allocations/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/fooddistribution/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/fooddistribution/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/jobcards/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jobcards/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/jobcards/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jobcards/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/partials/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/usertypes/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/usertypes/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/usertypes/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/usertypes/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,6 +192,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1s6jRMCSeCfSKNYXc2WtJrB4p4V" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -217,7 +228,8 @@
       <workItem from="1620280119574" duration="1113000" />
       <workItem from="1620281999488" duration="6833000" />
       <workItem from="1620629371503" duration="1135000" />
-      <workItem from="1623476956315" duration="6558000" />
+      <workItem from="1623476956315" duration="16324000" />
+      <workItem from="1623664466243" duration="59000" />
     </task>
     <servers />
   </component>
@@ -241,6 +253,10 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="300" y="85" key="#CLI_Interpreters/0.0.1440.860@0.0.1440.860" timestamp="1620212209819" />
+    <state x="690" y="309" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1623492852801">
+      <screen x="0" y="30" width="1920" height="1050" />
+    </state>
+    <state x="690" y="309" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1623492852801" />
     <state x="500" y="190" key="FileChooserDialogImpl" timestamp="1620632474387">
       <screen x="0" y="0" width="1440" height="870" />
     </state>

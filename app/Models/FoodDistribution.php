@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FoodDistribution extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $dates =  [
         'deleted_at'
@@ -30,4 +31,10 @@ class FoodDistribution extends Model
     public function allocation(){
         return $this->belongsTo(Allocation::class,'paynumber','paynumber');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'paynumber','paynumber');
+    }
+
 }

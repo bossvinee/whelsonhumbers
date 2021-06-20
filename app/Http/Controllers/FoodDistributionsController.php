@@ -160,9 +160,32 @@ class FoodDistributionsController extends Controller
      * @param  \App\Models\FoodDistribution  $foodDistribution
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FoodDistribution $foodDistribution)
+    public function destroy($id)
     {
-        //
+        $fdist = FoodDistribution::findOrFail($id);
+
+        if ($fdist->status == "Not Collected")
+        {
+            $fdist->delete();
+
+            if ($fdist->delete())
+            {
+                $allocation = Allocation::where('paynumber',$fdist->paynumber)->first();
+                $allocation->status = "not issued";
+                $allocation->food_allocation += 1;
+                $allocation->save();
+
+                return redirect('fdistributions')->with('success','Distribution has been deleted successfully');
+            }
+            else{
+                return back()->with('error','Failed to delete selected distribution !!.');
+            }
+        }
+        else
+        {
+            return back()->with('error','System could not resolve the issue !!!.');
+        }
+
     }
 
     public function getDepartment($paynumber)
@@ -427,9 +450,9 @@ class FoodDistributionsController extends Controller
 
                         if($distribution->save()) {
 
-                            $user = User::where('paynumber',$request->paynumber[$count])->first();
-                            $user->fcount -= 1;
-                            $user->save();
+                            // $user = User::where('paynumber',$request->paynumber[$count])->first();
+                            // $user->fcount -= 1;
+                            // $user->save();
 
                             if ($request->allocation[$count] === $jobcard->card_month) {
                                 $jobcard->issued += 1;

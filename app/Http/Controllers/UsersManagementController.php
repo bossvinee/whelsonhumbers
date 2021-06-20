@@ -108,7 +108,7 @@ class UsersManagementController extends Controller
             }
             else {
                 return back()->with('error','Password fields did not match.');
-            }
+            }+
         }
 
         return redirect()->back()->with('error','System was unable to create user account.');

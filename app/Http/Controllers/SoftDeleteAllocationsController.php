@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Jobcard;
+use App\Models\Allocation;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class SoftDeleteJobcardsController extends Controller
+class SoftDeleteAllocationsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,8 @@ class SoftDeleteJobcardsController extends Controller
      */
     public function index()
     {
-        $jobcards = Jobcard::onlyTrashed()->latest()->get();
-        return view('jobcards.deleted-jobcards',compact('jobcards'));
+        $allocations = Allocation::onlyTrashed()->latest()->get();
+        return view('allocations.deleted-allocations',compact('allocations'));
     }
 
     /**
@@ -70,7 +71,24 @@ class SoftDeleteJobcardsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $allocation = Allocation::withTrashed()->where('id',$id)->first();
+        $allocation->save();
+        $allocation->restore();
 
+        if ($allocation->restore())
+        {
+            $user = User::where('paynumber',$allocation->paynumber)->first();
+            $user->fcount += 1;
+            $user->mcount += 1;
+            $user->save();
+
+            return redirect('allocations')->with('success','Allocation has been restored successfully');
+        }
+        else{
+            return back()->with('error','Allocation could not be restored properly.');
+        }
+
+        return redirect('allocations')->with('error','Failed to restore allocation.');
     }
 
     /**
@@ -81,17 +99,9 @@ class SoftDeleteJobcardsController extends Controller
      */
     public function destroy($id)
     {
-        $jobcard = Jobcard::withTrashed()->where('id',$id)->first();
-        $jobcard->forceDelete();
+        $allocation = Allocation::withTrashed()->where('id',$id)->first();
+        $allocation->forceDelete();
 
-        return redirect('jobcards')->with('success','Jobcard has been deleted Successfully');
-    }
-
-    public function restoreJob($id) {
-        $card = Jobcard::withTrashed()->where('id',$id)->first();
-        $card->save();
-        $card->restore();
-
-        return redirect('jobcards')->with('success','Jobcard has been restored successfully');
+        return redirect('allocations')->with('success','Allocation has been deleted Successfully');
     }
 }

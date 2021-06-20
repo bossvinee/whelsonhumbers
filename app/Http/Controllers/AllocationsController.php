@@ -58,25 +58,52 @@ class AllocationsController extends Controller
 
         $user = User::where('paynumber',$request->paynumber)->first();
 
-        if($user)
-        {
-            $user_alloc = DB::table('allocations')
-                            ->join('users','users.paynumber','=','allocations.paynumber')
-                            ->select('users.name','allocations.*')
-                            ->where('allocations.paynumber',$user->paynumber)
-                            ->get();
+        if ($user->activated == 1) {
 
-            if($user_alloc->count() > 0) {
+            if($user)
+            {
+                $user_alloc = DB::table('allocations')
+                    ->join('users','users.paynumber','=','allocations.paynumber')
+                    ->select('users.name','allocations.*')
+                    ->where('allocations.paynumber',$user->paynumber)
+                    ->get();
 
-                $allocation_mon = DB::table('allocations')
-                            ->where('paynumber',$user->paynumber)
-                            ->where('allocation',$request->allocation)
-                            ->first();
+                if($user_alloc->count() > 0) {
 
-                if ($allocation_mon) {
+                    $allocation_mon = DB::table('allocations')
+                        ->where('paynumber',$user->paynumber)
+                        ->where('allocation',$request->allocation)
+                        ->first();
 
-                    return back()->with('error','The user has already been allocated.');
-                }else {
+                    if ($allocation_mon) {
+
+                        return back()->with('error','The user has already been allocated.');
+                    }else {
+
+                        $allocation = Allocation::create([
+                            'paynumber' => $request->input('paynumber'),
+                            'allocation' => strip_tags($request->input('allocation')),
+                            'meet_a' => $request->input('meet_a'),
+                            'meet_b' => $request->input('meet_b'),
+                            'meet_allocation' => 1,
+                            'food_allocation' => 1,
+                        ]);
+                        $allocation->save();
+
+                        if($allocation->save()) {
+
+                            $user->fcount += 1;
+                            $user->mcount += 1;
+                            $user->save();
+
+                            return redirect('allocations')->with('success','User has been allocated successfully');
+                        }else {
+
+                            return back()->with('error','User could not be allocated');
+                        }
+                    }
+
+                } else {
 
                     $allocation = Allocation::create([
                         'paynumber' => $request->input('paynumber'),
@@ -100,31 +127,10 @@ class AllocationsController extends Controller
                         return back()->with('error','User could not be allocated');
                     }
                 }
-
-            } else {
-
-                $allocation = Allocation::create([
-                    'paynumber' => $request->input('paynumber'),
-                    'allocation' => strip_tags($request->input('allocation')),
-                    'meet_a' => $request->input('meet_a'),
-                    'meet_b' => $request->input('meet_b'),
-                    'meet_allocation' => 1,
-                    'food_allocation' => 1,
-                ]);
-                $allocation->save();
-
-                if($allocation->save()) {
-
-                    $user->fcount += 1;
-                    $user->mcount += 1;
-                    $user->save();
-
-                    return redirect('allocations')->with('success','User has been allocated successfully');
-                }else {
-
-                    return back()->with('error','User could not be allocated');
-                }
             }
+
+        }else {
+            return redirect('allocations')->with('error','User has already been deleted in the system. ');
         }
 
         return redirect()->back()->with('error','OOps, something wrong with your input.');
@@ -139,7 +145,7 @@ class AllocationsController extends Controller
      */
     public function show(Allocation $allocation)
     {
-        //
+        return view('allocations.show',compact('allocation'));
     }
 
     /**
@@ -187,7 +193,26 @@ class AllocationsController extends Controller
     public function destroy($id)
     {
         $allocation = Allocation::findOrFail($id);
-        $allocation->delete();
+
+        // check the allocation status
+        $status = $allocation->status;
+
+        if ($status == 'not issued')
+        {
+            $deleted = $allocation->delete();
+
+            if ($deleted)
+            {
+                $allocation->user->fcount -= 1;
+                $allocation->user->mcount -= 1;
+                $allocation->user->save();
+
+                return redirect('allocations')->with('success','Allocation has been deleted successfully');
+            }
+        }else
+        {
+            return redirect()->back()->with('error','Allocation has already been issued.');
+        }
 
         return redirect('allocations')->with('success','Allocation has been deleted Successfully');
     }
@@ -228,26 +253,32 @@ class AllocationsController extends Controller
 
         foreach ($users as $user) {
 
-            $month_allocation = date('FY');
+            if ($user->activated == 1) {
 
-            if($user->allocation) {
-                // check if user has been allocated for that month
-                $allocation_user = Allocation::where('allocation',$month_allocation)
-                                            ->where('paynumber',$user->paynumber)
-                                            ->first();
-                if (!$allocation_user )
-                {
-                    $allocation = Allocation::create([
-                        'allocation' => $month_allocation,
-                        'paynumber' => $user->paynumber,
-                        'food_allocation' => 1,
-                        'meet_allocation' => 1,
-                        'meet_a' => $user->allocation->meet_a,
-                        'meet_b' => $user->allocation->meet_b,
-                    ]);
-                    $allocation->save();
-                } else {
-                    continue;
+                $month_allocation = date('FY');
+
+                if($user->allocation) {
+                    // check if user has been allocated for that month
+                    $allocation_user = Allocation::where('allocation',$month_allocation)
+                        ->where('paynumber',$user->paynumber)
+                        ->latest()->first();
+
+                    if (!$allocation_user )
+                    {
+                        $last_month = DB::table('allocations')->where('paynumber',$user->paynumber)->orderByDesc('id')->first();
+                         
+                        $allocation = Allocation::create([
+                            'allocation' => $month_allocation,
+                            'paynumber' => $user->paynumber,
+                            'food_allocation' => 1,
+                            'meet_allocation' => 1,
+                            'meet_a' => $last_month->meet_a,
+                            'meet_b' => $last_month->meet_b,
+                        ]);
+                        $allocation->save();
+                    } else {
+                        continue;
+                    }
                 }
             }
         }

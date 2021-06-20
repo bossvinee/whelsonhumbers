@@ -69,4 +69,9 @@ class User extends Authenticatable
         return $this->hasOne(Usertype::class,'type','usertype');
     }
 
+    public function fdistribution()
+    {
+        return $this->hasMany(FoodDistribution::class,'paynumber','paynumber');
+    }
+
 }

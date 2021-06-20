@@ -80,7 +80,7 @@
                                             <td>{{ $allocation->status }}</td>
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ route('allocations.edit',$allocation->id) }}" data-toggle="tooltip" title="Edit Allocation" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                                <a href="" data-toggle="tooltip" title="Show Allocation" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('allocations.show',$allocation->id) }}" data-toggle="tooltip" title="Show Allocation" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
                                                 <form method="POST" role="form" class="d-inline" action="{{ route('allocations.destroy',$allocation->id) }}">
                                                     @csrf
                                                     @method('DELETE')

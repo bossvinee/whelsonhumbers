@@ -145,7 +145,7 @@ class JobcardsController extends Controller
      */
     public function show(Jobcard $jobcard)
     {
-        
+
     }
 
     /**
@@ -177,8 +177,11 @@ class JobcardsController extends Controller
      * @param  \App\Models\Jobcard  $jobcard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jobcard $jobcard)
+    public function destroy($id)
     {
-        //
+        $jobcard = Jobcard::findOrFail($id);
+        $jobcard->delete();
+
+        return redirect('jobcards')->with('success','Jobcard has been deleted successfully');
     }
 }

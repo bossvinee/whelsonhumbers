@@ -3,6 +3,11 @@
 @section('template_linked_css')
     <link rel="stylesheet" href="{{ asset('select2/css/select2.min.css') }}">
 @endsection
+
+@section('template_title')
+    Add new meat distribution
+@endsection
+
 @section('content')
 <div class="page-header card">
     <div class="row align-items-end">
@@ -10,7 +15,7 @@
         <div class="col-lg-8">
             <div class="page-header-title">
                 <div class="d-inline">
-                    <h5>Meet Distribution</h5>
+                    <h5>Meat Distribution</h5>
                     <span class="pcoded-mtext"> Add New</span>
                 </div>
             </div>
@@ -24,7 +29,7 @@
                         ></a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ url('mdistributions') }}">Food Distribution</a>
+                        <a href="{{ url('mdistributions') }}">Meat Distribution</a>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ url('mdistributions/create') }}">Add New</a>
@@ -43,7 +48,7 @@
                     <div class="col-sm-12">
                       <div class="card">
                         <div class="card-header pb-0">
-                            <h4 style="font-size:18px;">New meet distribution <span class="float-right"><a href="{{ url('mdistributions') }}" class="btn d-inline btn-sm btn-light btn-light waves-light btn-round">Back to Mdistributions</a></span></h4>
+                            <h4 style="font-size:18px;">New meat distribution <span class="float-right"><a href="{{ url('mdistributions') }}" class="btn d-inline btn-sm btn-light btn-light waves-light btn-round">Back to Mdistributions</a></span></h4>
                         </div>
                         <div class="card-block" style="padding-top: 0;margin-top:0;">
                             <h4 class="sub-title"></h4>

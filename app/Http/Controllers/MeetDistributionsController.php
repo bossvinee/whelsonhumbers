@@ -136,7 +136,8 @@ class MeetDistributionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $distribution = MeetDistribution::findOrFail($id);
+        return view('meetdistribution.edit',compact('distribution'));
     }
 
     /**

@@ -95,7 +95,11 @@
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ url('add-collection/'.$distribution->id) }}" data-toggle="tooltip" title="Add to collection" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                                                 <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-                                                <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
+                                                <form method="POST" action="{{ route('fdistributions.destroy',$distribution->id) }}" class="d-inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Distribution"><i class="fa fa-trash-o"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

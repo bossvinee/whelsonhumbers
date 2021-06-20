@@ -49,13 +49,17 @@ Route::group(['middleware' => ['web','activity','role:admin']], function () {
     Route::post('allocation-import-send','App\Http\Controllers\AllocationsController@allocationImportSend');
     Route::get('all-alloctions','App\Http\Controllers\AllocationsController@allAllocations');
     Route::get('/department-users/{department}','App\Http\Controllers\AllocationsController@getDepartmentalUsers');
-    Route::resource('deleted-allocations', 'App\Http\Controllers\SoftDeleteAllocations');
+    Route::resource('deleted-allocations', 'App\Http\Controllers\SoftDeleteAllocationsController');
 
     // jobcards
     Route::resource('jobcards', 'App\Http\Controllers\JobcardsController');
+    Route::resource('deleted-jobcards','App\Http\Controllers\SoftDeleteJobcardsController');
+    Route::get('restore-job/{id}','App\Http\Controllers\SoftDeleteJobcardsController@restoreJob');
 
     // food distributions
     Route::resource('fdistributions', 'App\Http\Controllers\FoodDistributionsController');
+    Route::resource('deleted-fdistributions', 'App\Http\Controllers\SoftDeleteFoodDistributionsController');
+    Route::delete('delete-fdist','App\Http\Controllers\FoodDistributionsController@permanentDeleteFood');
     Route::get('bulk-food-form','App\Http\Controllers\FoodDistributionsController@bulkFoodDistribution');
     Route::post('bulk-food-upload','App\Http\Controllers\FoodDistributionsController@bulkFoodUpload');
     Route::get('food-import','App\Http\Controllers\FoodDistributionsController@getDisttibutionImport');

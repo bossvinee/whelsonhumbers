@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FoodCollection;
 use App\Models\FoodDistribution;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class FoodCollectionController extends Controller
@@ -53,45 +51,31 @@ class FoodCollectionController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $distribution = FoodDistribution::where('paynumber',$request->paynumber)
+        $collection = FoodDistribution::where('paynumber',$request->paynumber)
             ->where('allocation',$request->distribution)
             ->first();
 
         // check if collected by is supplied by
-        if (!empty($request->collected_by) || $request->collected_by !== null) {
+        if (empty($request->collected_by) || $request->collected_by == null)
+        {
+            $collection->date_collected = $request->input('date_collected');
+            $collection->status = "Collected";
+            $collection->collected_by = "SELF";
+            $collection->save();
 
-            if(empty($request->id_number) || $request->id_number == null) {
-                return back()->with('error','Collector ID number is missing. ');
-            } else {
+            if ($collection->save())
+            {
+                $collection->user->fcount -= 1;
+                $collection->user->save();
 
-                if ($distribution) {
-                    $distribution->date_collected = $request->date_collected;
-                    $distribution->status = "Collected";
-                    $distribution->collected_by = $request->collected_by;
-                    $distribution->id_number = $request->id_number;
-                    $distribution->save();
-
-                    return redirect('fcollection')->with('success','Record has been updated successfully.');
-
-                } else {
-
-                    return back()->with('error','Distribution does not exist.');
-                }
-
+                return redirect('fcollection')->with('success','Humber has been collected successfully.');
+                // $collected_user = User::where('paynumber',$collection->paynumber)->first();
+                // $collected_user->fcount -= 1;
+                // $collected_user->save();
             }
+
         }
 
-        if ($distribution) {
-
-            $distribution->status = "Collected";
-            $distribution->save();
-
-            return redirect('fcollection')->with('success','Record has been updated successfully.');
-
-        } else {
-
-            return back()->with('error','Distribution does not exist.');
-        }
     }
 
     /**

@@ -141,7 +141,7 @@
                         href="{{ url('jobcards') }}"
                         class="waves-effect waves-dark"
                         >
-                        <span class="pcoded-mtext">Jobcards</span>
+                        <span class="pcoded-mtext">Manage Jobcards</span>
                         </a>
                     </li>
                     <li class="">
@@ -154,7 +154,7 @@
                     </li>
                     <li class="">
                         <a
-                        href=""
+                        href="{{ url('deleted-jobcards') }}"
                         class="waves-effect waves-dark"
                         >
                         <span class="pcoded-mtext">Deleted</span>
@@ -201,7 +201,7 @@
                     </li>
                     <li class="">
                         <a
-                        href="{{ url('bulk-allocation') }}"
+                        href="{{ url('deleted-allocations') }}"
                         class="waves-effect waves-dark"
                         >
                         <span class="pcoded-mtext">Deleted Allocations</span>
@@ -257,7 +257,7 @@
                     </li>
                     <li class="">
                         <a
-                        href="{{ url('fdistributions') }}"
+                        href="{{ url('deleted-fdistributions') }}"
                         class="waves-effect waves-dark"
                         >
                         <span class="pcoded-mtext">Deleted Distributions</span>

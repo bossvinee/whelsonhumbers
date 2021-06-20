@@ -87,7 +87,11 @@
                                             <td style="white-space: nowrap;width:20%;">
                                                 <a href="{{ route('jobcards.edit',$jobcard->id) }}" data-toggle="tooltip" title="Edit Jobcard" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
                                                 <button type="button" class="d-inline btn-sm btn btn-success" data-toggle="modal" data-target="#showJobcard" data-issued="{{ $jobcard->issued }}" data-quantity="{{ $jobcard->quantity }}" data-month="{{ $jobcard->card_month }}" data-dateopened="{{ $jobcard->date_opened }}" data-cardnumber="{{ $jobcard->card_number }}"><i class="fa fa-eye"></i></button>
-                                                <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
+                                                <form method="POST" action="{{ route('jobcards.destroy',$jobcard->id) }}" role="form" class="d-inline">
+                                                    @csrf
+                                                    @method("DELETE")
+                                                    <button type="submit" class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Job card"><i class="fa fa-trash-o"></i></button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

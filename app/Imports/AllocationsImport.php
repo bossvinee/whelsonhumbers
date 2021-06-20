@@ -33,7 +33,7 @@ class AllocationsImport implements ToCollection, WithHeadingRow
 
                 if (!$user_allocation) {
 
-                    Allocation::create([
+                    $allocation = Allocation::create([
                         'paynumber' => $row['paynumber'],
                         'allocation' => $row['month'],
                         'meet_a' => $row['meet_a'],
@@ -41,6 +41,14 @@ class AllocationsImport implements ToCollection, WithHeadingRow
                         'meet_allocation' => 1,
                         'food_allocation' => 1,
                     ]);
+
+                    $allocation->save();
+
+                    if ($allocation->save()) {
+                        $allocation->user->fcount += 1;
+                        $allocation->user->mcount +=1;
+                        $allocation->user->save();
+                    }
                 }
             }
         }

@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="meet_a" class="col-sm-2 col-form-label"
-                                        >Meet Type 1 : </label
+                                        >Meat Type 1 : </label
                                     >
                                     <div class="col-sm-10">
                                         <select name="meet_a" id="meet_a" class="form-control @error('meet_a') is-invalid @enderror" required="" style="width: 100%;">
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="meet_b" class="col-sm-2 col-form-label"
-                                        >Meet Type 2 : </label
+                                        >Meat Type 2 : </label
                                     >
                                     <div class="col-sm-10">
                                         <select name="meet_b" id="meet_b" class="form-control @error('meet_b') is-invalid @enderror" required="" style="width: 100%;">

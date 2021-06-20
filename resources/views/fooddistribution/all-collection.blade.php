@@ -66,7 +66,6 @@
                                   <th>Collected By</th>
                                   <th>ID Number</th>
                                   <th>Done By</th>
-                                  <th>Action</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -96,10 +95,6 @@
                                             <td>{{ $distribution->collected_by }}</td>
                                             <td>{{ $distribution->id_number }}</td>
                                             <td>{{ $distribution->done_by }}</td>
-                                            <td style="white-space: nowrap;width:20%;">
-                                                <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
-                                                <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
-                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif

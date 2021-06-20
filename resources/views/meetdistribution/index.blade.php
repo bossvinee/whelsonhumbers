@@ -5,6 +5,10 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('dash_resource/css/buttons.datatables.min.css') }}">
 @endsection
 
+@section('template_title')
+    Showing all distributed meat humbers
+@endsection
+
 @section('content')
 <div class="page-header card">
     <div class="row align-items-end">
@@ -97,8 +101,8 @@
                                             <td>{{ $distribution->meet_b }}</td>
                                             <td>{{ $distribution->done_by }}</td>
                                             <td style="white-space: nowrap;width:20%;">
-                                                <a href="{{ url('add-collection/'.$distribution->id) }}" data-toggle="tooltip" title="Add to collection" class="d-inline btn btn-sm btn-primary"><i class="fa fa-pencil"></i></a>
-                                                <a href="" data-toggle="tooltip" title="Show Department" class="d-inline btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ url('add-collection/'.$distribution->id) }}" data-toggle="tooltip" title="Add to collection" class="d-inline btn btn-sm btn-primary"><i class="fa fa-check"></i></a>
+                                                <a href="{{ route('mdistributions.edit',$distribution->id) }}" data-toggle="tooltip" title="Edit Distribution" class="d-inline btn btn-success btn-sm"><i class="fa fa-pencil"></i></a>
                                                 <button class="d-inline btn-sm btn btn-danger" data-toggle="tooltip" title="Delete Department"><i class="fa fa-trash-o"></i></button>
                                             </td>
                                         </tr>
